@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:background="@drawable/background"
+    tools:context=".LoginActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/fastbuy"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:weightSum="3">
+
+            <ImageView
+                android:id="@+id/ivempresap"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1.1"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_imagotipo_fastbuy" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/txtNombreEmpresap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nombre Empresa"
+                    android:textColor="@color/blanco"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtrazonsocialp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Razon Social"
+                    android:textColor="@color/blanco"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btncerrarsesion"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="1.3"
+                android:background="@drawable/efecto_perfil"
+                android:tint="@color/blanco"
+                app:srcCompat="@drawable/ic_cerrar"
+                tools:scaleType="fitXY" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp">
+
+                    <Switch
+                        android:id="@+id/swAbierta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/amarillo"
+                        android:text="Empresa Abierta"
+                        android:textAlignment="center"
+                        android:textColor="@color/blanco"
+                        android:textSize="24sp" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animation_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:padding="20dp"
+                        android:scaleType="centerInside"
+                        app:lottie_autoPlay="true"
+                        app:lottie_fileName="address.json"
+                        app:lottie_loop="true" />
+
+                    <TextView
+                        android:id="@+id/txtUsuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_person_black_24dp"
+                        android:gravity="center_vertical"
+                        android:text="Usuario"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etUsuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/textbox"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:id="@+id/txtcampoClave"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_lock_black_24dp"
+                        android:gravity="center_vertical"
+                        android:text="Contraseña Actual"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/txtContrasenactual"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/textbox"
+                        android:ems="10"
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:id="@+id/txtcamponombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_lock_black_24dp"
+                        android:gravity="center_vertical"
+                        android:text="Contraseña"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/txtContrasena"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/textbox"
+                        android:ems="10"
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtrepe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:drawableLeft="@drawable/ic_lock_black_24dp"
+                            android:gravity="center_vertical"
+                            android:text="Repetir Contraseña"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/ivCoinciden"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_weight="0.1"
+                            android:background="@null"
+                            android:drawableLeft="@drawable/ic_no_repite"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txtNoCoinciden"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2.4"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="10dp"
+                            android:paddingTop="2dp"
+                            android:text="No Coinciden"
+                            android:textColor="@color/rojo"
+                            android:textSize="12dp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/txtContrasenaRepet"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/textbox"
+                        android:ems="10"
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btnAceptarp"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/efecto_btnsi"
+                        android:text="Aceptar"
+                        android:textColor="@color/blanco" />
+
+                    <Button
+                        android:id="@+id/btnCancelarp"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/efecto_btnno"
+                        android:text="Cancelar"
+                        android:textColor="@color/blanco" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</LinearLayout>

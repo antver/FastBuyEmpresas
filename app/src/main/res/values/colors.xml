@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="fastbuy">#01C4A4</color>
+    <color name="fastbuycambia">#5501C4A4</color>
+
+    <color name="humo">#E6E6E6</color>
+    <color name="iconos">#B1B2B2</color>
+    <color name="humo2">#EEEEEE</color>
+
+    <color name="amarillo">#EFBD14</color>
+    <color name="amarillocambio">#88EFBD14</color>
+
+    <color name="blanco">#FFFFFF</color>
+    <color name="gris">#666666</color>
+    <color name="negro">#000</color>
+    <color name="verde">#00C42A</color>
+    <color name="verdecambio">#88C42A</color>
+
+    <color name="alert">#FA5858</color>
+    <color name="alertcambio">#88FA5858</color>
+    <color name="rojo">#E31E24</color>
+    <color name="rojocambia">#88E31E24</color>
+
+    <color name="exito">#01c4a4</color>
+    <color name="naranja">#FF872B</color>
+    <color name="naranja2">#FF222B</color>
+
+    <color name="pendiente">#f0ad4e</color>
+    <color name="pendientecambio">#88f0ad4e</color>
+
+    <color name="proceso">#666680</color>
+    <color name="procesocambio">#88666680</color>
+
+    <color name="atendido">#5cb85c</color>
+    <color name="atendidocambio">#885cb85c</color>
+
+    <color name="preparando">#0275d8</color>
+    <color name="preparandocambio">#880275d8</color>
+
+    <color name="recoger">#F206F5 </color>
+    <color name="recogercambio">#88F206F5 </color>
+
+    <color name="cancelado">#99d9534f</color>
+    <color name="canceladocambio">#55d9534f</color>
+
+    <color name="azul">#AAAAFF</color>
+</resources>

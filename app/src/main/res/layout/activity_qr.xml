@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    tools:context=".MenuActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/fastbuy"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:weightSum="3">
+
+            <ImageView
+                android:id="@+id/ivempresaqr"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1.1"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_imagotipo_fastbuy" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/txtNombreEmpresaqr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nombre Empresa"
+                    android:textColor="@color/blanco"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtrazonsocialqr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Razon Social"
+                    android:textColor="@color/blanco"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btnperfilqr"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="11dp"
+                android:layout_weight="1.3"
+                android:background="@drawable/efecto_perfil"
+                android:tint="@color/blanco"
+                app:srcCompat="@drawable/ic_perfilempresa" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical"
+        tools:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/ivqr"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="50dp" />
+
+        <TextView
+            android:id="@+id/txtapunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apunta tu teléfono hacia esta pantalla para escanear el codigo"
+            android:textSize="20dp"
+            tools:layout_marginTop="20dp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:padding="20dp"
+            android:scaleType="centerInside"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="lf30_editor_HVcdJK.json"
+            app:lottie_loop="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-50dp"
+        android:background="@color/humo"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnmenuqr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/efecto_btnmenu"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:tint="@drawable/tint_menu"
+            app:srcCompat="@drawable/ic_menu" />
+
+        <ImageButton
+            android:id="@+id/btnproductosqr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/efecto_btnmenu"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:tint="@drawable/tint_menu"
+            app:srcCompat="@drawable/ic_productos" />
+        <ImageButton
+            android:id="@+id/btnreportes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/efecto_btnmenu"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:tint="@drawable/tint_menu"
+            app:srcCompat="@drawable/ic_content_paste_black_24dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lyCategorias"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/efecto_lyproductos"
+
+    android:orientation="horizontal"
+    android:padding="15dp"
+    android:weightSum="3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ivproductos"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:layout_weight="1"
+            android:background="@null"
+            app:srcCompat="@drawable/ic_productos" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.8"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtproductos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:drawableTint="@color/negro"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:text="asjdjadjkasdjasdjñasdhñahsdlhasldhasldñhasldhñasdhañsldhasñdhlashdlahsdlhasdlhasldhaslhdñashdlñashñdhasñhdñasd"
+            android:textColor="@color/blanco"
+            android:textSize="16dp"
+            tools:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.2"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <Switch
+            android:id="@+id/swproductos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:paddingLeft="15dp" />
+
+        <TextView
+            android:id="@+id/txtPrecio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="S/. 5.00"
+            android:textAlignment="textEnd"
+            android:textColor="@color/blanco"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+</LinearLayout>

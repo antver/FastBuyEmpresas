@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lyDetalles"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:weightSum="4">
+
+    <TextView
+        android:id="@+id/txtfecha"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1.1"
+        android:gravity="start|center_vertical"
+        android:text="Ener.-2020"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/txthoraDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.1"
+        android:gravity="start|center_vertical"
+        android:text="24:00:00"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/txtProductos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6"
+        android:text="Producto dsdfsdfsdfsdfsdfsdfsdfsdfsdfs dfsdfsdfsdfsdfsdv sdfsdvsfsdfv "
+        android:textAlignment="textStart"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/txthoras"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1.2"
+        android:gravity="right|center_vertical"
+        android:text="S/. 50.00"
+        android:textSize="14dp" />
+
+</LinearLayout>

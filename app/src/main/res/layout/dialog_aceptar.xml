@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+
+    <TextView
+        android:id="@+id/txtEmpresa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EMPRESA"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¿Deseas tomar el Aceptar el Pedido?"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btnSi"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@drawable/efecto_btnsi"
+            android:textColor="@color/blanco"
+            android:text="SI" />
+
+        <Button
+            android:id="@+id/btnNo"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/efecto_btnno"
+            android:text="NO"
+            android:textColor="@color/blanco" />
+    </LinearLayout>
+</LinearLayout>

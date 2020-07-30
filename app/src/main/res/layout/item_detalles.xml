@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lyDetalles"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:weightSum="4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtCantidad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Producto dsdfsdfsdfsdfsdfsdfsdfsdfsdfs dfsdfsdfsdfsdfsdv sdfsdvsfsdfv "
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.15"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtPrecio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="0.00"
+            android:textAlignment="textEnd"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1.05"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".SplashScreenActivity">
+
+            <ImageButton
+                android:id="@+id/ivcancelard"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:background="@drawable/efecto_btncancelarpd"
+                android:padding="5dp"
+                android:tint="@color/blanco"
+                app:srcCompat="@drawable/ic_clear_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/ivPreparado"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:background="@drawable/efecto_btnpreparadopd"
+                android:padding="5dp"
+                android:tint="@color/blanco"
+                app:srcCompat="@drawable/ic_done_all_black_24dp" />
+
+            <TextView
+                android:id="@+id/txtCambioestado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/rojo"
+                android:text="Cancelado"
+                android:textAlignment="center"
+                android:textColor="@color/blanco"
+                android:textSize="12dp" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

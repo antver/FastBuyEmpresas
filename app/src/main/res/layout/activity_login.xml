@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:background="@drawable/background"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/txtTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FastBuy"
+            android:textAlignment="center"
+            android:textColor="@color/fastbuy"
+            android:textSize="55dp"
+            tools:layout_marginBottom="5dp"
+            tools:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/txtEmpresaTema"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:text="Partner"
+            android:textAlignment="center"
+            android:textColor="@color/fastbuy"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/txtUsuariot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_person_black_24dp"
+            android:gravity="center_vertical"
+            android:text="Empresa ID"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/textbox"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:id="@+id/txtclavet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:gravity="center_vertical"
+            android:text="Contraseña"
+            android:textStyle="bold" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/blanco">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etClave"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/textbox"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/txtOlvidotema"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:text="¿Olvidaste tu contraseña?"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnIngresar"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right"
+            android:background="@drawable/efecto_btnlogin"
+            android:text="Ingresar"
+            android:textAllCaps="false"
+            android:textColor="@color/blanco"
+            android:textSize="18dp" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

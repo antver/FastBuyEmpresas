@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    tools:context=".MenuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/fastbuy"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:weightSum="3">
+
+            <ImageView
+                android:id="@+id/ivempresar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1.1"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_imagotipo_fastbuy" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/txtNombreEmpresar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nombre Empresa"
+                    android:textColor="@color/blanco"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtrazonsocialr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Razon Social"
+                    android:textColor="@color/blanco"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btnperfilr"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="11dp"
+                android:layout_weight="1.3"
+                android:background="@drawable/efecto_perfil"
+                android:tint="@color/blanco"
+                app:srcCompat="@drawable/ic_perfilempresa"
+                tools:scaleType="fitXY" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="50dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvtiporeporte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Elija el tipo de Reporte"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/tiporeporte_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"></Spinner>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:maxLines="1"
+                    android:text="___________________________________________________________" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtReporteBarras"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DESDE"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context=".SplashScreenActivity">
+
+                    <EditText
+                        android:id="@+id/etPlannedDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:hint="@string/calendario"
+                        android:inputType="date"
+                        android:maxLines="1" />
+
+                    <LinearLayout
+                        android:id="@+id/lyCombo1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="2">
+
+                        <Spinner
+                            android:id="@+id/mes1_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_weight="1">
+
+                        </Spinner>
+
+                        <Spinner
+                            android:id="@+id/year_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1">
+
+                        </Spinner>
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtReporteBarras1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="HASTA"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context=".SplashScreenActivity">
+
+                    <EditText
+                        android:id="@+id/etPlannedDate2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:hint="@string/calendario"
+                        android:inputType="date"
+                        android:maxLines="1" />
+
+                    <LinearLayout
+                        android:id="@+id/lycombo2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="2">
+
+                        <Spinner
+                            android:id="@+id/mes2_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_weight="1">
+
+                        </Spinner>
+
+                        <Spinner
+                            android:id="@+id/year1_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1">
+
+                        </Spinner>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/bntreportar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="70dp"
+                    android:background="@color/fastbuy"
+                    android:text="Reportar"
+                    android:textColor="@color/blanco" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-50dp"
+        android:background="@color/humo"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnmenur"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/efecto_btnmenu"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:tint="@drawable/tint_menu"
+            app:srcCompat="@drawable/ic_menu" />
+
+        <ImageButton
+            android:id="@+id/btnproductosr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/efecto_btnmenu"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:tint="@drawable/tint_menu"
+            app:srcCompat="@drawable/ic_productos" />
+        <ImageButton
+            android:id="@+id/btnreportes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/efecto_btnmenu"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:tint="@drawable/tint_menu"
+            app:srcCompat="@drawable/ic_content_paste_black_24dp" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "906310225091",
+    "firebase_url": "https://fastbuyempresas.firebaseio.com",
+    "project_id": "fastbuyempresas",
+    "storage_bucket": "fastbuyempresas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906310225091:android:eb624992b75399ea9d6676",
+        "android_client_info": {
+          "package_name": "com.fastbuy.fastbuyempresas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906310225091-vfrot9dddh571ie0i9kcogvnfj0k34mn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fastbuy.fastbuyempresas",
+            "certificate_hash": "537625eada3593203272927cd1f7ada0161e9b05"
+          }
+        },
+        {
+          "client_id": "906310225091-0kmvfe9n483j0qf8jq0mdmjun6gqirlu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJip6jbZN5Xtz2gRzlYirCZzwIWZU79ME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906310225091-0kmvfe9n483j0qf8jq0mdmjun6gqirlu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
