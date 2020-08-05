@@ -11,13 +11,14 @@ public class Producto implements Serializable {
     private Empresa empresa;
     private String precio;
     private int estado;
-    private int presentacion;
+    //private int presentacion;
+    private Presentacion presentacion;
 
-    public int getPresentacion() {
+    public Presentacion getPresentacion() {
         return presentacion;
     }
 
-    public void setPresentacion(int presentacion) {
+    public void setPresentacion(Presentacion presentacion) {
         this.presentacion = presentacion;
     }
 

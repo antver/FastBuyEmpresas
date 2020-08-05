@@ -60,7 +60,6 @@ public class BakgroundPedidos extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
         /*
         SharedPreferences mypreferences= PreferenceManager.getDefaultSharedPreferences(BakgroundPedidos.this);
         servicio= mypreferences.getString("SERVICIO","unknown");*/

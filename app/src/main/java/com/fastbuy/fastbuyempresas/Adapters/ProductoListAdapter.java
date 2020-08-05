@@ -126,7 +126,7 @@ public class ProductoListAdapter extends BaseAdapter {
                         finalHolder2.swactivar.setChecked(true);
                         String url = Globales.servidor + "/Empresas/sp_empresas_desactivarpro?auth=" +
                                 Globales.token + "&codigop=" + productoList.get(position).getCodigo() +
-                                "&codigou=" + codigou+"&pres="+productoList.get(position).getPresentacion();
+                                "&codigou=" + codigou+"&pres="+productoList.get(position).getPresentacion().getCodigo();
                         String mensaje = "Desactivado";
                         String tipo = "Desea Desactivar este Producto?";
                         createCustomDialog(position, url, mensaje, tipo, finalHolder1).show();
@@ -135,7 +135,7 @@ public class ProductoListAdapter extends BaseAdapter {
                 }
             }
         });
-        Log.v("RUTA_IMAGEN",url);
+        //Log.v("RUTA_IMAGEN",url);
         final ViewHolder finalHolder = holder;
         Glide.with(context)
                 .load(url)
