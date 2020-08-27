@@ -142,7 +142,6 @@ public class ProductoListAdapter extends BaseAdapter {
                 .placeholder ( R.mipmap.ic_launcher)
                 .centerCrop()
                 .error(R.mipmap.ic_launcher)
-                .transform(new CircleCrop()) //5
                 .into(holder.ivproducto);
         return  row;
     }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.fastbuy.fastbuyempresas.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_reportes"
+        android:name="com.fastbuy.fastbuyempresas.ui.dashboard.DashboardFragment"
+        android:label="@string/title_reportes"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_productos"
+        android:name="com.fastbuy.fastbuyempresas.ui.productos.ProductosFragment"
+        android:label="@string/title_reportes"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_ajustes"
+        android:name="com.fastbuy.fastbuyempresas.ui.notifications.NotificationsFragment"
+        android:label="@string/title_ajustes"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>

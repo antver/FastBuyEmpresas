@@ -5,15 +5,16 @@
     android:id="@+id/lyCategorias"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
-    android:background="@drawable/efecto_lycategoria"
-    android:orientation="horizontal"
-    android:padding="15dp">
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="80dp"
         android:orientation="vertical"
+        android:background="@drawable/efecto_boton"
+
         tools:weightSum="1">
 
         <TextView
@@ -23,11 +24,10 @@
             android:layout_marginBottom="2dp"
             android:layout_weight="1"
             android:drawableTint="@color/negro"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:maxLines="1"
             android:text="CATEGORIAS"
-            android:textColor="@color/blanco"
-            android:textSize="25dp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 

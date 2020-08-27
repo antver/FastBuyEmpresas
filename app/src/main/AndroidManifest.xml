@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
@@ -22,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateHidden">
+        <activity
+            android:name=".PrincipalActivity"
+            android:label="@string/title_activity_principal"></activity>
         <activity
             android:name=".GraficoActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -87,8 +91,14 @@
             android:resource="@color/fastbuy" />
 
         <service
-            android:name=".BakgroundPedidos"
+            android:name=".Config.ServicioPartner"
             android:enabled="true" />
+
+        <receiver android:name=".Config.BootBroadcast">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -70,14 +70,12 @@ import java.util.Date;
 public class ReporteActivity extends AppCompatActivity {
     private static final String TAG = "BackgroundSoundService";
     Spinner spinner,spinner2,spinner3,spinner4,tiporeporte_spinner;
-    TextView txtNombreEmpresar,txtrazonsocialr,tvtiporeporte;
+    TextView tvtiporeporte;
     Typeface script;
     float barWidth = 9f;
     String mes1, mes2;
     String year1,year2;
     Button bntreportar;
-    ImageButton btnreportes,btnmenur,btnproductosr,btnperfilr;
-    ImageView ivempresar;
     EditText etPlannedDate,etPlannedDate2;
     LinearLayout lycombo1, lycombo2;
 
@@ -92,13 +90,6 @@ public class ReporteActivity extends AppCompatActivity {
         spinner3=(Spinner) findViewById(R.id.mes2_spinner);
         spinner4=(Spinner) findViewById(R.id.year1_spinner);
         tiporeporte_spinner=(Spinner) findViewById(R.id.tiporeporte_spinner);
-        btnreportes=(ImageButton) findViewById(R.id.btnreportes);
-        btnmenur=(ImageButton) findViewById(R.id.btnmenur);
-        btnproductosr=(ImageButton) findViewById(R.id.btnproductosr);
-        txtNombreEmpresar=(TextView) findViewById(R.id.txtNombreEmpresar);
-        txtrazonsocialr=(TextView) findViewById(R.id.txtrazonsocialr);
-        ivempresar=(ImageView) findViewById(R.id.ivempresar);
-        btnperfilr=(ImageButton) findViewById(R.id.btnperfilr);
         tvtiporeporte=(TextView) findViewById(R.id.tvtiporeporte);
         etPlannedDate=(EditText) findViewById(R.id.etPlannedDate);
         etPlannedDate2=(EditText) findViewById(R.id.etPlannedDate2);
@@ -164,24 +155,8 @@ public class ReporteActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        btnreportes.setBackgroundResource(R.color.fastbuy);
         int color= ContextCompat.getColor(getApplicationContext(), R.color.blanco);
-        ImageViewCompat.setImageTintList(btnreportes, ColorStateList.valueOf(color));
 
-        btnmenur.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ReporteActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnproductosr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ReporteActivity.this, ProductosActivity.class);
-                startActivity(intent);
-            }
-        });
         SharedPreferences mypreferences= PreferenceManager.getDefaultSharedPreferences(ReporteActivity.this);
         String nombreempresa= mypreferences.getString("NOMBRE_EMPRESA","unknown");
         String razonsocial= mypreferences.getString("RAZON_SOCIAL","unknown");
@@ -191,8 +166,6 @@ public class ReporteActivity extends AppCompatActivity {
 
         String fuente2="fonts/GOTHIC.ttf";
         this.script= Typeface.createFromAsset(getAssets(),fuente2);
-        txtNombreEmpresar.setTypeface(script);
-        txtrazonsocialr.setTypeface(script);
         tvtiporeporte.setTypeface(script);
         etPlannedDate.setTypeface(script);
         etPlannedDate2.setTypeface(script);
@@ -209,37 +182,8 @@ public class ReporteActivity extends AppCompatActivity {
             }
         });
 
-        txtNombreEmpresar.setText(nombreempresa);
-        txtrazonsocialr.setText(razonsocial);
-
         String url= Globales.servidorfotos+"/logos/"+fotoempresa;
-        Log.v("RUTA_IMAGEN",url);
-        Picasso.with(ReporteActivity.this)
-                .load(url)
-                .error(R.mipmap.ic_launcher)
-                .fit()
-                .centerInside()
-                .into(ivempresar, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        Bitmap imagebitmap= ((BitmapDrawable) ivempresar.getDrawable()).getBitmap();
-                        RoundedBitmapDrawable imageDrawable= RoundedBitmapDrawableFactory.create(getResources(),imagebitmap);
-                        imageDrawable.setCircular(true);
-                        imageDrawable.setCornerRadius(Math.max(imagebitmap.getWidth(),imagebitmap.getHeight())/ 2.0f);
-                        ivempresar.setImageDrawable(imageDrawable);
-                    }
-                    @Override
-                    public void onError() {
-                        ivempresar.setImageResource(R.mipmap.ic_launcher);
-                    }
-                });
-        btnperfilr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ReporteActivity.this, PerfilActivity.class);
-                startActivity(intent);
-            }
-        });
+
         bntreportar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

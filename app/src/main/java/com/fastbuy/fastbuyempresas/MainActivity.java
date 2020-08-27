@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences myPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
                 String empresa= myPreferences.getString("NOMBRE_EMPRESA","unknown");
-                String servicio= myPreferences.getString("SERVICIO","unknown");
-                if(empresa.equals("unknown") || servicio.equals("unknown")){
-                    Intent intent=new Intent(MainActivity.this,LoginActivity.class);
-                    startActivity((intent));
+                //String servicio= myPreferences.getString("SERVICIO","unknown");
+                if(empresa.equals("unknown")){
+                    Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
                 }else{
-                    Intent intent= new Intent(MainActivity.this,MenuActivity.class);
+                    Intent intent= new Intent(MainActivity.this, PrincipalActivity.class);
                     startActivity(intent);
                 }
             }

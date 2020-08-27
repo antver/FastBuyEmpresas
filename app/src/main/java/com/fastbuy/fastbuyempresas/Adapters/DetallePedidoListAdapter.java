@@ -143,8 +143,8 @@ public class DetallePedidoListAdapter extends BaseAdapter {
                         holder.btnlistoped.setVisibility(View.INVISIBLE);
                     }
                     else{
-                        TextView txtOpciones= (TextView) activity.findViewById(R.id.txtOpciones);
-                        txtOpciones.setVisibility(View.GONE);
+                        //TextView txtOpciones= (TextView) activity.findViewById(R.id.txtOpciones);
+                        //txtOpciones.setVisibility(View.GONE);
                         //holder.txtCambioestado.setText("Tarjeta");
                         holder.txtCambioestado.setBackgroundResource(R.color.rojo);
                         holder.txtCambioestado.setTextColor(holder.txtCambioestado.getContext().getResources().getColor(R.color.blanco));
@@ -254,8 +254,8 @@ public class DetallePedidoListAdapter extends BaseAdapter {
                         if(mensaje.equals("Cancelado")){
                             pedidoList.get(position).setEstado(2);
                             Globales.Pedidositem.add(String.valueOf(numero));
-                            EditText cajaCambio = (EditText) activity.findViewById(R.id.cajaCambio);
-                            cajaCambio.setText("1");
+                            //EditText cajaCambio = (EditText) activity.findViewById(R.id.cajaCambio);
+                           // cajaCambio.setText("1");
                             Globales.cancelarDetalle = 1;
                             notifyDataSetChanged();
                             alertDialog.dismiss();

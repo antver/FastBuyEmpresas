@@ -14,7 +14,7 @@
     <color name="amarillocambio">#88EFBD14</color>
 
     <color name="blanco">#FFFFFF</color>
-    <color name="gris">#666666</color>
+    <color name="gris">#888</color>
     <color name="negro">#000</color>
     <color name="verde">#00C42A</color>
     <color name="verdecambio">#88C42A</color>
@@ -37,7 +37,7 @@
     <color name="atendido">#5cb85c</color>
     <color name="atendidocambio">#885cb85c</color>
 
-    <color name="preparando">#0275d8</color>
+    <color name="preparando">#5285d8</color>
     <color name="preparandocambio">#880275d8</color>
 
     <color name="recoger">#F206F5 </color>

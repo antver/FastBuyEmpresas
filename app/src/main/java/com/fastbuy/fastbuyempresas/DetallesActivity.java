@@ -32,12 +32,14 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +52,7 @@ import com.android.volley.toolbox.Volley;
 import com.fastbuy.fastbuyempresas.Adapters.DetallePedidoListAdapter;
 import com.fastbuy.fastbuyempresas.Adapters.PedidoListAdapter;
 import com.fastbuy.fastbuyempresas.Config.Globales;
+import com.fastbuy.fastbuyempresas.Config.Operaciones;
 import com.fastbuy.fastbuyempresas.Entidades.DetallePedido;
 import com.fastbuy.fastbuyempresas.Entidades.Empresa;
 import com.fastbuy.fastbuyempresas.Entidades.Pedido;
@@ -75,55 +78,64 @@ public class DetallesActivity extends AppCompatActivity {
     ArrayList<DetallePedido> list;
     DetallePedidoListAdapter adapter = null;
     GridView gridView;
-    ImageButton btnCancelarPed,btnAceptarPed,btnCancelarD, btnlistoped,btnpreparadotodo,btnQr;
+    Button btnAceptarPed;
+    Button btnCancelarPed,btnCancelarD, btnlistoped,btnpreparadotodo,btnQr;
     String codigoe,nombreempresa,url,alerta,tipo, item, colorestadop;
-    Button btnCancelarDeta,btnAceptarDeta;
+    Button btnCancelarDeta,btnAceptarDeta, btnAlertarDriver;
     LinearLayout lymostrar;
     public String items="";
     Typeface script;
     DatabaseReference nDatabaseReference = FirebaseDatabase.getInstance().getReference();
     DatabaseReference cambioPedidos2 = nDatabaseReference.child("cancelado/");
 
-    EditText cajaCambio ;
+    //EditText cajaCambio ;
     DetallesActivity.AsyncTask_load ast;
 
-    TextView txtView_nombre_cliente, txtView_codigo_cliente, txtView_direccion_cliente, txtView_telefono_cliente;
-    LinearLayout linearLayout_info_client, linearLayout_3_buttons;
+    TextView txtView_nombre_cliente, txtView_codigo_cliente, txtView_direccion_cliente, txtView_telefono_cliente, txtTemporizador;
+    LinearLayout linearLayout_info_client, linearLayout_3_buttons, barestado;
 
-    Button btnCollapseInfoClient;
+    //Button btnCollapseInfoClient;
     Button btnIniciarDelivery, btnFinalizarDelivery;
 
     TextView txtView_TipoRecojo;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
-        cajaCambio = (EditText) findViewById(R.id.cajaCambio);
+        //cajaCambio = (EditText) findViewById(R.id.cajaCambio);
         txtestado= (TextView) findViewById(R.id.txtestado2);
         txthora= (TextView) findViewById(R.id.txthora2);
+        txtTemporizador = (TextView) findViewById(R.id.txtTemporizador);
         txtitems= (TextView) findViewById(R.id.txtitem2);
         gridView = (GridView) findViewById(R.id.gvDetalles);
         txtMontoSubtotal= (TextView) findViewById((R.id.txtMontoSubtotal));
-        btnAceptarPed= (ImageButton) findViewById(R.id.btnAceptarPed);
-        btnCancelarPed= (ImageButton) findViewById(R.id.btnCancelarPed);
-        btnCancelarD= (ImageButton) findViewById(R.id.ivcancelard);
-        btnlistoped= (ImageButton) findViewById(R.id.btnListoPed);
-        btnpreparadotodo= (ImageButton) findViewById(R.id.btnListoPed);
-        btnAceptarDeta=(Button) findViewById(R.id.btnAceptarDeta);
-        btnCancelarDeta=(Button)findViewById(R.id.btnCancelarDeta);
-        lymostrar= (LinearLayout) findViewById(R.id.lyCanceladoDet);
+        btnAceptarPed= (Button) findViewById(R.id.btnAceptarPed);
+        //btnCancelarPed= (ImageButton) findViewById(R.id.btnCancelarPed);
+        //btnCancelarD= (ImageButton) findViewById(R.id.ivcancelard);
+        btnlistoped= (Button) findViewById(R.id.btnListoPed);
+        btnAlertarDriver = (Button) findViewById(R.id.btnAlertarDriver);
+        btnpreparadotodo= (Button) findViewById(R.id.btnListoPed);
+        //btnAceptarDeta=(Button) findViewById(R.id.btnAceptarDeta);
+        //btnCancelarDeta=(Button)findViewById(R.id.btnCancelarDeta);
+        barestado= (LinearLayout) findViewById(R.id.barestado);
         txtfpago=(TextView) findViewById(R.id.txtfpago);
         txttotaltema=(TextView) findViewById(R.id.txttotaltema);
-        txtProducto=(TextView) findViewById(R.id.txtProducto);
-        txtPrecio=(TextView) findViewById(R.id.txtPrecio);
-        txtOpciones=(TextView) findViewById(R.id.txtOpciones);
-        btnQr=(ImageButton) findViewById(R.id.btnQr);
+        //txtProducto=(TextView) findViewById(R.id.txtProducto);
+        //txtPrecio=(TextView) findViewById(R.id.txtPrecio);
+        //txtOpciones=(TextView) findViewById(R.id.txtOpciones);
+        //btnQr=(ImageButton) findViewById(R.id.btnQr);
         txtView_TipoRecojo = (TextView) findViewById(R.id.text_view_tipo_recojo);
 
         // Layouts cuando Recojo en tienda es = 1
-        linearLayout_info_client =  findViewById(R.id.layout_info_client);
+        //linearLayout_info_client =  findViewById(R.id.layout_info_client);
         linearLayout_3_buttons =    findViewById(R.id.layout_3_buttons);
 
         // Txt views para información del Cliente
@@ -135,11 +147,11 @@ public class DetallesActivity extends AppCompatActivity {
         // Buttons para iniciar y finalizar Delivery y mostrar datos del Cliente (Incluidos layout_3_buttons)
         btnIniciarDelivery =        findViewById(R.id.btnIniciarDelivery);
         btnFinalizarDelivery =      findViewById(R.id.btnFinalizarDelivery);
-        btnCollapseInfoClient =     findViewById(R.id.btnCollapseInfoClient);
+        //btnCollapseInfoClient =     findViewById(R.id.btnCollapseInfoClient);
 
 
         // Ocultando Layouts por defecto (se activarán cuando se verifique que PED_RecogerEnTienda sea igual a 1)
-        linearLayout_info_client.setVisibility(View.GONE);
+        //linearLayout_info_client.setVisibility(View.GONE);
         linearLayout_3_buttons.setVisibility(View.GONE);
         txtView_TipoRecojo.setVisibility(View.GONE);
 
@@ -147,7 +159,7 @@ public class DetallesActivity extends AppCompatActivity {
 
 
         // Click event para hacer visible la información del usuario (Solo funciona cuando PED_RecogerEnTienda es igual a 1)
-        btnCollapseInfoClient.setOnClickListener(new Button.OnClickListener() {
+        /*btnCollapseInfoClient.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if( View.GONE == linearLayout_info_client.getVisibility()) {
@@ -158,15 +170,12 @@ public class DetallesActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
 
         btnIniciarDelivery.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 iniciarDelivery();
-
-
             }
         });
 
@@ -183,13 +192,13 @@ public class DetallesActivity extends AppCompatActivity {
         txthora.setTypeface(script);
         txtitems.setTypeface(script);
         txtfpago.setTypeface(script);
-        btnAceptarDeta.setTypeface(script);
-        btnCancelarDeta.setTypeface(script);
+        //btnAceptarDeta.setTypeface(script);
+        //btnCancelarDeta.setTypeface(script);
         txttotaltema.setTypeface(script);
         txtMontoSubtotal.setTypeface(script);
-        txtProducto.setTypeface(script);
-        txtPrecio.setTypeface(script);
-        txtOpciones.setTypeface(script);
+        //txtProducto.setTypeface(script);
+        //txtPrecio.setTypeface(script);
+        //txtOpciones.setTypeface(script);
 
         ast = new AsyncTask_load();
         ast.execute();
@@ -197,22 +206,8 @@ public class DetallesActivity extends AppCompatActivity {
         SharedPreferences myPreferences = PreferenceManager.getDefaultSharedPreferences(DetallesActivity.this);
         nombreempresa = (myPreferences.getString("NOMBRE_EMPRESA", "unknown"));
         codigoe = (myPreferences.getString("CODIGO_EMPRESA", "unknown"));
-        colorEstado(Globales.pedidoestado); //centry gothic
-        txtestado.setText(Globales.pedidoestado);
-        txthora.setText(Globales.pedidohora);
-        txtitems.setText(Globales.pedidoitems);
-        txtfpago.setText("Pago Con "+Globales.fpago);
-        progDailog = new ProgressDialog(DetallesActivity.this);
-        progDailog.setMessage("Cargando Detalles...");
-        progDailog.setIndeterminate(true);
-        progDailog.setCancelable(false);
-        progDailog.show();
-        if(isNetDisponible()){
-            //Toast.makeText(DetallesActivity.this,"Conexión a internet", Toast.LENGTH_SHORT).show();
-        }else{
-            Intent intent=new Intent(DetallesActivity.this, DesconectadoActivity.class);
-            startActivity(intent);
-        }
+
+
         listaDetalles();
         btnAceptarPed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,7 +219,7 @@ public class DetallesActivity extends AppCompatActivity {
                 createCustomDialog(url,alerta,tipo,colorestadop).show();
             }
         });
-        btnCancelarPed.setOnClickListener(new View.OnClickListener(){
+        /*btnCancelarPed.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 if(Globales.fpago.equals("Efectivo")){
@@ -242,7 +237,7 @@ public class DetallesActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
         btnpreparadotodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -253,25 +248,18 @@ public class DetallesActivity extends AppCompatActivity {
                 createCustomDialog(url,alerta,tipo,colorestadop).show();
             }
         });
-        btnCancelarDeta.setOnClickListener(new View.OnClickListener() {
+        /*btnCancelarDeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*url=Globales.servidor + "/Empresas/PendienteDetalle?auth=" + Globales.token+"&codigo="+Globales.pedidoSeleccionado;
-                alerta= "Desea Cancelar?";
-                tipo="Cambios Cancelados";
-                colorestadop=" PREPARADO";
-                createCustomDialog(url,alerta,tipo,colorestadop).show();*/
-                //Globales.cancelarDetalle=0;
-                Globales.Pedidositem.clear();
                 finish();
                 overridePendingTransition(0, 0);
                 startActivity(getIntent());
                 overridePendingTransition(0, 0);
                 Globales.pedidoestado=" PENDIENTE";
                 items="";
-                //colorEstado(Globales.pedidoestado);
             }
         });
+
         btnAceptarDeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -300,9 +288,9 @@ public class DetallesActivity extends AppCompatActivity {
                 Intent intent = new Intent(DetallesActivity.this, QrActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
-        cajaCambio.addTextChangedListener(new TextWatcher() {
+        /*cajaCambio.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -320,7 +308,7 @@ public class DetallesActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        });*/
     }
 
     private void finalizarDelivery() {
@@ -378,8 +366,6 @@ public class DetallesActivity extends AppCompatActivity {
                     try {
                         list = new ArrayList<>();
                         JSONArray lista = new JSONArray(response);
-                        Log.i("SQL UPDATE", lista.toString() );
-
                         progDailog.dismiss();
                         btnIniciarDelivery.setVisibility(View.GONE);
 
@@ -401,7 +387,19 @@ public class DetallesActivity extends AppCompatActivity {
     }
 
     public void listaDetalles(){
+        progDailog = new ProgressDialog(DetallesActivity.this);
+        progDailog.setMessage("Cargando Detalles...");
+        progDailog.setIndeterminate(true);
+        progDailog.setCancelable(false);
+        progDailog.show();
+        if(isNetDisponible()){
+            //Toast.makeText(DetallesActivity.this,"Conexión a internet", Toast.LENGTH_SHORT).show();
+        }else{
+            Intent intent=new Intent(DetallesActivity.this, DesconectadoActivity.class);
+            startActivity(intent);
+        }
         String consulta= Globales.servidorPedido+"/Pedido/AndroidDetallePedido?auth="+Globales.token+"&pedido="+Globales.pedidoSeleccionado;
+        //Log.v("URL_DETALLES", consulta);
         RequestQueue queue= Volley.newRequestQueue(DetallesActivity.this);
         StringRequest stringRequest= new StringRequest(Request.Method.GET, consulta, new Response.Listener<String>() {
             @SuppressLint("SetTextI18n")
@@ -422,10 +420,24 @@ public class DetallesActivity extends AppCompatActivity {
                         String PED_telefono=    lista.getJSONObject(0).getString("PED_Telefono");
                         String PED_nombre=      lista.getJSONObject(0).getString("PED_Nombre");
                         int PED_atendido=      lista.getJSONObject(0).getInt("PED_Atendido");
-
-
-
-                        txtView_codigo_cliente.setText(PED_codigo);
+                        String tiempoPreparacion =      lista.getJSONObject(0).getString("PED_Tiempo");
+                        String fechapedido =      lista.getJSONObject(0).getString("PED_FechaPedido");
+                        String horahora =      lista.getJSONObject(0).getString("PED_HoraPedido");
+                        String PED_FormaPago =      lista.getJSONObject(0).getString("PED_FormaPago");
+                        String estado = String.valueOf(cargarPedido(Integer.parseInt(lista.getJSONObject(0).getString("PED_Atendido"))));
+                        colorEstado(PED_atendido); //centry gothic
+                        txtestado.setText(estado);
+                        txthora.setText(horahora);
+                        //txtitems.setText(Globales.pedidoitems);
+                        txtfpago.setText("Pago Con "+PED_FormaPago);
+                        if(PED_atendido == 0 || PED_atendido == 4) {
+                            Operaciones op = new Operaciones();
+                            op.ejecutar(txtTemporizador, tiempoPreparacion, fechapedido, horahora);
+                        }
+                        else{
+                            txtTemporizador.setVisibility(View.GONE);
+                        }
+                        txtView_codigo_cliente.setText("ORDEN Nº " + PED_codigo);
                         txtView_direccion_cliente.setText(PED_direccion);
                         txtView_nombre_cliente.setText(PED_nombre);
                         txtView_telefono_cliente.setText(PED_telefono);
@@ -438,14 +450,13 @@ public class DetallesActivity extends AppCompatActivity {
                             txtView_TipoRecojo.setVisibility(View.VISIBLE);
                         }
                         if(recogerEnTienda==0){
-                            txtView_TipoRecojo.setText("Llevar a Domicilio");
+                            txtView_TipoRecojo.setText("Servicio Delivery");
                             txtView_TipoRecojo.setVisibility(View.VISIBLE);
-
                         }
 
                         if(PED_atendido == 0)
                         {
-                            btnIniciarDelivery.setVisibility(View.VISIBLE);
+                            btnIniciarDelivery.setVisibility(View.GONE);
                         }
                         if(PED_atendido == 3)
                         {
@@ -454,7 +465,7 @@ public class DetallesActivity extends AppCompatActivity {
 
 
 
-                        Log.i("HELLO", lista.toString());
+                        //Log.i("HELLO", lista.toString());
                         int cont = 0;
                         double suma = 0;
                         for (int i = 0; i < lista.length(); i++){
@@ -476,7 +487,7 @@ public class DetallesActivity extends AppCompatActivity {
                             detallePedido.setPersonalizacion(pendiente.getString("PD_Personalizado"));
                             detallePedido.setEstado(pendiente.getInt("PD_Entregado"));
                             detallePedido.setAtendido(Integer.parseInt(pendiente.getString("PED_Atendido")));
-                            Globales.pedidoestado=String.valueOf(cargarPedido(Integer.parseInt(pendiente.getString("PED_Atendido"))));
+
                             //botonesDetalle(pendiente.getInt("PD_Entregado"));
 
                             suma += pendiente.getDouble("PD_Total");
@@ -487,7 +498,8 @@ public class DetallesActivity extends AppCompatActivity {
                         txtMontoSubtotal.setText(String.valueOf(suma) + "0");
                         adapter = new DetallePedidoListAdapter(DetallesActivity.this, R.layout.item_detalles, list, DetallesActivity.this);
                         gridView.setAdapter(adapter);
-
+                        gridView.setVerticalScrollBarEnabled(false);
+                        setGridViewHeightBasedOnChildren(gridView, 1);
                         //adapter.notifyDataSetChanged();
 
                         progDailog.dismiss();
@@ -507,73 +519,101 @@ public class DetallesActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    public void colorEstado(String pedido){
-        if(pedido==" PENDIENTE"){
-            txtestado.setBackgroundResource(R.color.pendiente);//INVISIBLE
-            btnAceptarPed.setVisibility(View.VISIBLE);
-            btnCancelarPed.setVisibility(View.VISIBLE);
-            btnQr.setVisibility(View.INVISIBLE);
+    public void setGridViewHeightBasedOnChildren(GridView gridView, int columns) {
+        ListAdapter listAdapter = gridView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
 
-            btnlistoped.setVisibility(View.INVISIBLE);
+        int totalHeight = 0;
+        int items = listAdapter.getCount();
+        int rows = 0;
+
+        View listItem = listAdapter.getView(0, null, gridView);
+        listItem.measure(0, 0);
+        totalHeight = listItem.getMeasuredHeight();
+
+        float x = 1;
+        if( items > columns ){
+            x = items/columns;
+            rows = (int) (x + 1);
+            totalHeight *= rows;
+        }
+
+        ViewGroup.LayoutParams params = gridView.getLayoutParams();
+        params.height = totalHeight;
+        gridView.setLayoutParams(params);
+
+    }
+
+
+    public void colorEstado(int pedido){
+        if(pedido==0){//PEDIDO PENDIENTE
+            barestado.setBackgroundResource(R.drawable.shadow_pedidos);
+            btnAceptarPed.setVisibility(View.VISIBLE);
+            //btnCancelarPed.setVisibility(View.VISIBLE);
+            //btnQr.setVisibility(View.INVISIBLE);
+            btnAlertarDriver.setVisibility(View.GONE);
+            btnlistoped.setVisibility(View.GONE);
             //lymostrar.setVisibility(View.VISIBLE);
-        }if(pedido==" FINALIZADO"){
-            txtestado.setBackgroundResource(R.color.atendido);
+        }if(pedido==1){//PEDIDO FINALIZADO
+            barestado.setBackgroundResource(R.drawable.shadow_atendido);
+            //txtestado.setBackgroundResource(R.color.atendido);
             btnAceptarPed.setVisibility(View.INVISIBLE);
             btnCancelarPed.setVisibility(View.INVISIBLE);
             btnQr.setVisibility(View.INVISIBLE);
 
             btnlistoped.setVisibility(View.INVISIBLE);
-            lymostrar.setVisibility(View.INVISIBLE);
-        }if(pedido==" ANULADO"){
+            //lymostrar.setVisibility(View.INVISIBLE);
+        }if(pedido==2){//PEDIDO ANULADO
             txtestado.setBackgroundResource(R.color.rojo);
             btnAceptarPed.setVisibility(View.INVISIBLE);
             btnCancelarPed.setVisibility(View.INVISIBLE);
             btnQr.setVisibility(View.INVISIBLE);
 
             btnlistoped.setVisibility(View.INVISIBLE);
-            lymostrar.setVisibility(View.INVISIBLE);
-        }if(pedido==" EN PROCESO"){
-            txtestado.setBackgroundResource(R.color.proceso);
+            //lymostrar.setVisibility(View.INVISIBLE);
+        }if(pedido==3){//PEDIDO EN CAMINO
+            barestado.setBackgroundResource(R.drawable.shadow_proceso);
+            //txtestado.setBackgroundResource(R.color.proceso);
             btnAceptarPed.setVisibility(View.INVISIBLE);
             btnCancelarPed.setVisibility(View.INVISIBLE);
             btnQr.setVisibility(View.INVISIBLE);
 
             btnlistoped.setVisibility(View.VISIBLE);
-            lymostrar.setVisibility(View.INVISIBLE);
-        }if(pedido==" PREPARANDO"){
-            txtestado.setBackgroundResource(R.color.preparando);
-            btnAceptarPed.setVisibility(View.INVISIBLE);
-            btnCancelarPed.setVisibility(View.INVISIBLE);
-            btnQr.setVisibility(View.INVISIBLE);
-
+            //lymostrar.setVisibility(View.INVISIBLE);
+        }if(pedido==4){//PEDIDO EN PREPARACION
+            barestado.setBackgroundResource(R.drawable.shadow_azul);
+            btnAceptarPed.setVisibility(View.GONE);
+            //btnCancelarPed.setVisibility(View.INVISIBLE);
+            //btnQr.setVisibility(View.INVISIBLE);
+            btnAlertarDriver.setVisibility(View.VISIBLE);
             btnlistoped.setVisibility(View.VISIBLE);
-            lymostrar.setVisibility(View.INVISIBLE);
-        }if(pedido==" PREPARADO"){
-            txtestado.setBackgroundResource(R.color.recoger);
-            btnAceptarPed.setVisibility(View.INVISIBLE);
-            btnCancelarPed.setVisibility(View.INVISIBLE);
-            btnQr.setVisibility(View.INVISIBLE);
-
+            //lymostrar.setVisibility(View.INVISIBLE);
+        }if(pedido==5){//PEDIDO CON PREPARACION FINALIZADA
+            barestado.setBackgroundResource(R.drawable.shadow_proceso);
+            //txtestado.setBackgroundResource(R.color.recoger);
+            btnAceptarPed.setVisibility(View.GONE);
             btnlistoped.setVisibility(View.INVISIBLE);
-            lymostrar.setVisibility(View.INVISIBLE);
         }
-        if(pedido==" ESPERA"){
+        if(pedido==7){ //PEDIDO EN ESPERA POR REPARTIDOR
             txtestado.setBackgroundResource(R.color.alert);
             btnAceptarPed.setVisibility(View.INVISIBLE);
             btnCancelarPed.setVisibility(View.INVISIBLE);
             btnQr.setVisibility(View.INVISIBLE);
 
             btnlistoped.setVisibility(View.INVISIBLE);
-            lymostrar.setVisibility(View.INVISIBLE);
+            //lymostrar.setVisibility(View.INVISIBLE);
         }
-        if(pedido==" RECOGER"){
+        if(pedido==8){ //PEDIDO PARA RECOGER
             txtestado.setBackgroundResource(R.color.proceso);
             btnAceptarPed.setVisibility(View.INVISIBLE);
             btnCancelarPed.setVisibility(View.INVISIBLE);
             btnQr.setVisibility(View.VISIBLE);
 
             btnlistoped.setVisibility(View.INVISIBLE);
-            lymostrar.setVisibility(View.INVISIBLE);
+            //lymostrar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -616,40 +656,43 @@ public class DetallesActivity extends AppCompatActivity {
                                         JSONObject object = new JSONObject(response);
                                         String respuesta = object.getString("mensaje");
                                         if(respuesta.equals("Listo")){
-                                            Globales.pedidoestado=colorestadops;
-                                            Toast toast = Toast.makeText(DetallesActivity.this, "Pedido "+ tipos+" con éxito.", Toast.LENGTH_SHORT);
-                                            View vistaToast = toast.getView();
-                                            vistaToast.setBackgroundResource(R.drawable.toast_exito);
-                                            toast.show();
+                                            listaDetalles();
+                                            //Globales.pedidoestado=colorestadops;
+                                            //Toast toast = Toast.makeText(DetallesActivity.this, "Pedido "+ tipos+" con éxito.", Toast.LENGTH_SHORT);
+                                            //View vistaToast = toast.getView();
+                                            //vistaToast.setBackgroundResource(R.drawable.toast_exito);
+                                            //toast.show();
                                             alertDialog.dismiss();
-                                            finish();
-                                            overridePendingTransition(0, 0);
-                                            startActivity(getIntent());
-                                            overridePendingTransition(0, 0);
+                                            //finish();
+                                            //overridePendingTransition(0, 0);
+                                            //startActivity(getIntent());
+                                            //overridePendingTransition(0, 0);
                                         }
                                         if(!respuesta.equals("Listo") && !respuesta.equals("CAMBIADO")){
-                                            Toast toast = Toast.makeText(DetallesActivity.this, respuesta, Toast.LENGTH_SHORT);
-                                            View vistaToast = toast.getView();
-                                            vistaToast.setBackgroundResource(R.drawable.toast_alerta);
-                                            toast.show();
+                                            listaDetalles();
+                                            //Toast toast = Toast.makeText(DetallesActivity.this, respuesta, Toast.LENGTH_SHORT);
+                                            //View vistaToast = toast.getView();
+                                            //vistaToast.setBackgroundResource(R.drawable.toast_alerta);
+                                            //toast.show();
                                             alertDialog.dismiss();
-                                            finish();
-                                            overridePendingTransition(0, 0);
-                                            startActivity(getIntent());
-                                            overridePendingTransition(0, 0);
+                                            //finish();
+                                            //overridePendingTransition(0, 0);
+                                            //startActivity(getIntent());
+                                            //overridePendingTransition(0, 0);
                                         }
                                         if(respuesta.equals("CAMBIADO")){
-                                            Globales.pedidoestado=colorestadops;
+                                            listaDetalles();
+                                            /*Globales.pedidoestado=colorestadops;
                                             Toast toast = Toast.makeText(DetallesActivity.this, "Cambios Aceptados", Toast.LENGTH_SHORT);
                                             View vistaToast = toast.getView();
                                             vistaToast.setBackgroundResource(R.drawable.toast_exito);
-                                            alertDialog.dismiss();
+
                                             finish();
                                             overridePendingTransition(0, 0);
                                             startActivity(getIntent());
                                             overridePendingTransition(0, 0);
-                                            Globales.Pedidositem.clear();
-
+                                            Globales.Pedidositem.clear();*/
+                                            alertDialog.dismiss();
                                         }
 
                                     } catch (JSONException e) {

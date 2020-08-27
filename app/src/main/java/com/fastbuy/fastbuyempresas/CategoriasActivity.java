@@ -37,6 +37,7 @@ import com.fastbuy.fastbuyempresas.Config.Globales;
 import com.fastbuy.fastbuyempresas.Entidades.Categoria;
 import com.fastbuy.fastbuyempresas.Entidades.DetallePedido;
 import com.fastbuy.fastbuyempresas.Entidades.Empresa;
+import com.fastbuy.fastbuyempresas.Entidades.Presentacion;
 import com.fastbuy.fastbuyempresas.Entidades.Producto;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -48,8 +49,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CategoriasActivity extends AppCompatActivity {
-    ImageView btnmenu3, btnproductos3,ivimagen3,btnperfil3,btnreportes;
-    TextView txtNombre3,txtrazonsocial3;
+    //ImageView btnmenu3, btnproductos3,ivimagen3,btnperfil3,btnreportes;
+    //TextView txtNombre3,txtrazonsocial3;
     GridView gridView3;
     ArrayList<Producto> list;
     ProgressDialog progDailog=null;
@@ -60,19 +61,19 @@ public class CategoriasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categorias);
 
-        btnmenu3=(ImageView) findViewById(R.id.btnmenu3);
-        btnproductos3=(ImageView) findViewById(R.id.btnproductos3);
-        txtrazonsocial3= (TextView) findViewById(R.id.txtrazonsocial3);
-        txtNombre3= (TextView) findViewById(R.id.txtNombreEmpresa3);
+        //btnmenu3=(ImageView) findViewById(R.id.btnmenu3);
+        //btnproductos3=(ImageView) findViewById(R.id.btnproductos3);
+        //txtrazonsocial3= (TextView) findViewById(R.id.txtrazonsocial3);
+        //txtNombre3= (TextView) findViewById(R.id.txtNombreEmpresa3);
         gridView3= (GridView) findViewById(R.id.gvCategoriasSub);
-        ivimagen3= (ImageView) findViewById(R.id.ivempresa3);
-        btnperfil3= (ImageView) findViewById(R.id.btnperfil3);
-        btnreportes=(ImageView) findViewById(R.id.btnreportes);
+        //ivimagen3= (ImageView) findViewById(R.id.ivempresa3);
+        //btnperfil3= (ImageView) findViewById(R.id.btnperfil3);
+        //btnreportes=(ImageView) findViewById(R.id.btnreportes);
 
         String fuente2="fonts/GOTHIC.ttf";
         this.script= Typeface.createFromAsset(getAssets(),fuente2);
-        txtNombre3.setTypeface(script);
-        txtrazonsocial3.setTypeface(script);
+        //txtNombre3.setTypeface(script);
+        //txtrazonsocial3.setTypeface(script);
 
         SharedPreferences mypreferences= PreferenceManager.getDefaultSharedPreferences(CategoriasActivity.this);
         String nombreempresa= mypreferences.getString("NOMBRE_EMPRESA","unknown");
@@ -80,12 +81,12 @@ public class CategoriasActivity extends AppCompatActivity {
         String fotoempresa= mypreferences.getString("FOTO_EMPRESA","unknown");
         String codigoe= mypreferences.getString("CODIGO_EMPRESA","unknown");
         String codigou= mypreferences.getString("UBICACION","unknown");
-        txtNombre3.setText(nombreempresa);
-        txtrazonsocial3.setText(razonsocial);
-        ivimagen3= (ImageView) findViewById(R.id.ivempresa3);
+        //txtNombre3.setText(nombreempresa);
+        //txtrazonsocial3.setText(razonsocial);
+        //ivimagen3= (ImageView) findViewById(R.id.ivempresa3);
         String url= Globales.servidorfotos+"/logos/"+fotoempresa;
-        Log.v("RUTA_IMAGEN",url);
-        Picasso.with(CategoriasActivity.this)
+        //Log.v("RUTA_IMAGEN",url);
+        /*Picasso.with(CategoriasActivity.this)
                 .load(url)
                 .error(R.mipmap.ic_launcher)
                 .fit()
@@ -103,7 +104,7 @@ public class CategoriasActivity extends AppCompatActivity {
                     public void onError() {
                         ivimagen3.setImageResource(R.mipmap.ic_launcher);
                     }
-                });
+                });*/
         if(isNetDisponible()){
             //Toast.makeText(CategoriasActivity.this,"Conexión a internet", Toast.LENGTH_SHORT).show();
         }else{
@@ -115,10 +116,10 @@ public class CategoriasActivity extends AppCompatActivity {
         progDailog.setIndeterminate(true);
         progDailog.setCancelable(false);
         progDailog.show();
-        btnproductos3.setBackgroundResource(R.color.fastbuy);
+       // btnproductos3.setBackgroundResource(R.color.fastbuy);
         //MyDrawableCompat.setColorFilter(btnmenu.getBackground(), R.color.blanco);
         int color= ContextCompat.getColor(getApplicationContext(), R.color.blanco);
-        ImageViewCompat.setImageTintList(btnproductos3, ColorStateList.valueOf(color));
+        /*ImageViewCompat.setImageTintList(btnproductos3, ColorStateList.valueOf(color));
         btnmenu3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +140,7 @@ public class CategoriasActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoriasActivity.this, PerfilActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
         listaDetalles(codigoe,codigou,Globales.categoriac);
 
     }
@@ -162,7 +163,9 @@ public class CategoriasActivity extends AppCompatActivity {
                             producto.setEstado(pendiente.getInt("estado"));
                             producto.setDescripcion(pendiente.getString("descripcion"));
                             producto.setCodigo(pendiente.getInt("codigop"));
-                            producto.setPresentacion(pendiente.getInt("pres"));
+                            Presentacion presentacion = new Presentacion();
+                            presentacion.setCodigo(pendiente.getInt("pres"));
+                            producto.setPresentacion(presentacion);
                             producto.setPrecio(pendiente.getString("precio"));
 
                             list.add(producto);

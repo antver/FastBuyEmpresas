@@ -14,10 +14,13 @@ import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -62,9 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         etClave.setTypeface(script2);
         txtOlvidotema.setTypeface(script2);
         btnIngresar.setTypeface(script2);
-        if(isNetDisponible()){
-            //Toast.makeText(LoginActivity.this,"Conexión a internet", Toast.LENGTH_SHORT).show();
-        }else{
+        if(!isNetDisponible()){
             Intent intent=new Intent(LoginActivity.this, DesconectadoActivity.class);
             startActivity(intent);
         }
@@ -131,7 +132,6 @@ public class LoginActivity extends AppCompatActivity {
                                     myEditor.putString("LOGIN", objeto.getString("login"));
                                     myEditor.putString("SERVICIO", "0");
                                     myEditor.putString("CIERRE", objeto.getString("cierre"));
-
                                     myEditor.commit();
                                     finish();
 
@@ -148,13 +148,25 @@ public class LoginActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        proDialog.dismiss();
+                        Intent intent=new Intent(LoginActivity.this, DesconectadoActivity.class);
+                        startActivity(intent);
                     }
                 });
+                stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                        10000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 queue.add(stringRequest);
             }
         });
+
+
+
+
     }
+
+
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             moveTaskToBack(true);
@@ -180,9 +192,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isNetDisponible() {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
-
         NetworkInfo actNetInfo = connectivityManager.getActiveNetworkInfo();
-
         return (actNetInfo != null && actNetInfo.isConnected());
     }
 }

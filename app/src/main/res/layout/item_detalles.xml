@@ -6,29 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingBottom="10dp"
-    android:weightSum="4">
+    android:weightSum="3"
+    android:paddingBottom="10dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
+        android:layout_weight="1"
         android:layout_height="match_parent"
-        android:layout_weight="1.2"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtCantidad"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
             android:text="0"
             android:textAlignment="center"
-            android:textSize="18dp" />
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.6"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
@@ -36,24 +35,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Producto dsdfsdfsdfsdfsdfsdfsdfsdfsdfs dfsdfsdfsdfsdfsdv sdfsdvsfsdfv "
-            android:textSize="14dp" />
+            android:text="..."
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:layout_weight="1.15"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtPrecio"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
             android:text="0.00"
             android:textAlignment="textEnd"
-            android:textSize="18dp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,7 +62,8 @@
         android:orientation="horizontal"
         android:padding="5dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingRight="10dp"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"

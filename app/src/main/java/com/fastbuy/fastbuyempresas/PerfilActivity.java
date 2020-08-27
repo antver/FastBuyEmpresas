@@ -42,6 +42,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fastbuy.fastbuyempresas.Config.Globales;
+import com.fastbuy.fastbuyempresas.Config.ServicioPartner;
 import com.fastbuy.fastbuyempresas.Entidades.Empresa;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -360,7 +361,7 @@ public class PerfilActivity extends AppCompatActivity {
                             editor.clear();
                             editor.commit();
 
-                            Intent myService = new Intent(PerfilActivity.this, BakgroundPedidos.class);
+                            Intent myService = new Intent(PerfilActivity.this, ServicioPartner.class);
                             stopService(myService);
 
                             Intent intent= new Intent(PerfilActivity.this,LoginActivity.class);

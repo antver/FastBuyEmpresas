@@ -2,33 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lyPedidos"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/pendiente"
     android:orientation="horizontal"
-    android:padding="15dp"
-
-    android:weightSum="2"
-    tools:background="@drawable/layout_bordes_pendientes">
-
+    android:weightSum="2">
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.7"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/ivdetalles"
+        android:id="@+id/lyPedidos"
+        android:padding="10dp"
+        android:background="@drawable/shadow_pedidos"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:tint="@color/blanco"
-            android:theme="@style/BorderlessButton"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            app:srcCompat="@drawable/ic_visibility_black_24dp" />
-    </LinearLayout>
+            android:layout_weight="1.7"
+            android:orientation="horizontal">
 
-    <LinearLayout
+            <ImageView
+                android:id="@+id/ivdetalles"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tint="@color/blanco"
+                android:theme="@style/BorderlessButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                app:srcCompat="@drawable/ic_visibility_black_24dp" />
+        </LinearLayout>
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.3"
@@ -41,6 +43,7 @@
             android:layout_marginBottom="2dp"
             android:drawableLeft="@drawable/ic_pedido"
             android:gravity="center_vertical"
+            android:textStyle="bold"
             android:maxLines="1"
             android:text="PEDIDO PENDIENTE"
             android:textColor="@color/blanco" />
@@ -68,9 +71,10 @@
                 android:drawableLeft="@drawable/ic_reloj"
                 android:text=" 00:00 a.m."
                 android:textAlignment="textEnd"
+                android:textStyle="bold"
                 android:textColor="@color/blanco" />
         </LinearLayout>
 
     </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>

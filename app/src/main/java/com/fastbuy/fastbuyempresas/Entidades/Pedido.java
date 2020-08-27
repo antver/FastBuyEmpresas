@@ -6,6 +6,7 @@ public class Pedido implements Serializable {
     private int codigo;
     private float vendido;
     private String HoraPedido;
+    private String FechaPedido;
     private String tiempopreparacion;
     private int item;
     private String atendido;
@@ -65,5 +66,13 @@ public class Pedido implements Serializable {
 
     public void setTiempopreparacion(String tiempopreparacion) {
         this.tiempopreparacion = tiempopreparacion;
+    }
+
+    public String getFechaPedido() {
+        return FechaPedido;
+    }
+
+    public void setFechaPedido(String fechaPedido) {
+        FechaPedido = fechaPedido;
     }
 }

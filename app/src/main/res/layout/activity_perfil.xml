@@ -117,6 +117,7 @@
                         android:id="@+id/animation_view"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
+                        android:baselineAligned="false"
                         android:padding="20dp"
                         android:scaleType="centerInside"
                         app:lottie_autoPlay="true"

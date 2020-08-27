@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ui.notifications.NotificationsFragment">
+
+    <Switch
+        android:id="@+id/swAbierta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow_verde"
+        android:text="Empresa Abierta"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/blanco"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/negro"
+        android:text="Datos del Partner"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="10dp"
+        android:textSize="18dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="2dp"
+        android:paddingVertical="10dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/shadow_simple">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="8sp"
+            android:textColor="@color/negro"
+            android:text="Nombre Comercial"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="PIMENTEL"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="2dp"
+        android:paddingVertical="10dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/shadow_simple">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="8sp"
+            android:textColor="@color/negro"
+            android:text="Descripción"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="PANADERÍA Y PASTELERÍA"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="2dp"
+        android:paddingVertical="10dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/shadow_simple">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="8sp"
+            android:textColor="@color/negro"
+            android:text="Ciudad"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="CHEPÉN"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="2dp"
+        android:paddingVertical="10dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/shadow_simple">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="8sp"
+            android:textColor="@color/negro"
+            android:text="Dirección"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:hint="Ingrese la dirección del establecimiento"
+            android:text="Av Trujillo 512"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/negro"
+        android:text="Soporte"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="10dp"
+        android:textSize="18dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="2dp"
+        android:paddingVertical="10dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/shadow_simple">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Reportar un problema"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="2dp"
+        android:paddingVertical="10dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/shadow_simple">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Contáctanos"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/negro"
+        android:text="Usuario"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="10dp"
+        android:textSize="18dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="2dp"
+        android:paddingVertical="10dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/shadow_simple">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Cambiar Contraseña"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="2dp"
+        android:paddingVertical="10dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/shadow_simple">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/blanco"
+            android:src="@drawable/ic_cerrar" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/negro"
+            android:text="Cerrar Sesión"/>
+    </LinearLayout>
+</LinearLayout>

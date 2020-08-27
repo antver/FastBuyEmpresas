@@ -50,7 +50,7 @@
                     android:layout_weight="1"
                     android:text="Nombre Empresa"
                     android:textColor="@color/blanco"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -91,7 +91,6 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
         android:numColumns="1">
-
     </GridView>
 
     <LinearLayout

@@ -14,6 +14,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -61,6 +62,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fastbuy.fastbuyempresas.Adapters.PedidoListAdapter;
+import com.fastbuy.fastbuyempresas.Config.ServicioPartner;
 import com.fastbuy.fastbuyempresas.Entidades.Pedido;
 import com.fastbuy.fastbuyempresas.Entidades.RDPedidos;
 import com.fastbuy.fastbuyempresas.Entidades.RDPedidos2;
@@ -87,6 +89,7 @@ public class MenuActivity extends AppCompatActivity {
     ImageView ivimagen, btnperfil, btnmenu, btnproductos,btnreportes;
     ProgressDialog progDailog = null;
     TextView txtNombre;
+    Intent myService;
     TextView txtrazonsocial;
     PedidoListAdapter adapter = null;
     TextView txtPedidos;
@@ -99,6 +102,16 @@ public class MenuActivity extends AppCompatActivity {
     MenuActivity.AsyncTask_load ast;
     Typeface script2;
     //DatabaseReference cambioPedidos = nDatabaseReference.child("pedidos").child("empresa");
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,8 +192,11 @@ public class MenuActivity extends AppCompatActivity {
                 }
             }
         });*/
-        Intent myService = new Intent(MenuActivity.this, BakgroundPedidos.class);
-        startService(myService);
+
+        if (!isMyServiceRunning(ServicioPartner.class)){ //método que determina si el servicio ya está corriendo o no
+            myService = new Intent(this, ServicioPartner.class); //serv de tipo Intent
+            startService(myService); //ctx de tipo Context
+        }
         //ast = new AsyncTask_load();
         //ast.execute();
 

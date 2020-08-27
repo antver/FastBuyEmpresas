@@ -3,24 +3,30 @@ package com.fastbuy.fastbuyempresas.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fastbuy.fastbuyempresas.Config.Globales;
+import com.fastbuy.fastbuyempresas.Config.Operaciones;
 import com.fastbuy.fastbuyempresas.DetallesActivity;
 import com.fastbuy.fastbuyempresas.Entidades.Pedido;
 import com.fastbuy.fastbuyempresas.MenuActivity;
 import com.fastbuy.fastbuyempresas.R;
 
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class PedidoListAdapter extends BaseAdapter {
     private Context context;
@@ -104,13 +110,52 @@ public class PedidoListAdapter extends BaseAdapter {
         this.script2= Typeface.createFromAsset(context.getAssets(),fuente2);
         holder.txtpedido.setTypeface(script2);
         holder.txtitems.setTypeface(script2);
-        holder.txthora.setTypeface(script2);
+        //holder.txthora.setTypeface(script2);
 
-        Pedido pedido = pedidoList.get(position);
+        final Pedido pedido = pedidoList.get(position);
         holder.txtpedido.setText(pedido.getAtendido());
-        holder.txthora.setText(separarHora(pedido.getHoraPedido()));
+        //holder.txthora.setText(separarHora(pedido.getHoraPedido()));
+        /*Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Execute a comethode in the intervel 3sec
+
+            }
+        },1000);*/
+
+        final ViewHolder finalHolder = holder;
+        if(pedido.getAtendido().equals(" PENDIENTE") || pedido.getAtendido().equals(" PREPARANDO")){
+            Operaciones operaciones = new Operaciones();
+            operaciones.ejecutar(holder.txthora, pedido.getTiempopreparacion(), pedido.getFechaPedido(),pedido.getHoraPedido());
+        }
+        else{
+            holder.txthora.setVisibility(View.GONE);
+        }
+
+
         holder.txtitems.setText(String.valueOf(" "+pedido.getItem()+" Items"));
         colorPedido(pedido.getAtendido(),holder);
+        //final ViewHolder finalHolder = holder;
+
+        /*CountDownTimer countDownTimer = new CountDownTimer(segundosdehora(pedido.getTiempopreparacion()), 1000) {
+            public void onTick(long millisUntilFinished) {
+
+                long segundos = millisUntilFinished / 1000L;
+                int day = (int) TimeUnit.SECONDS.toDays(segundos);
+                long hours = TimeUnit.SECONDS.toHours(segundos) - (day *24);
+                long minute = TimeUnit.SECONDS.toMinutes(segundos) - (TimeUnit.SECONDS.toHours(segundos)* 60);
+                long second = TimeUnit.SECONDS.toSeconds(segundos) - (TimeUnit.SECONDS.toMinutes(segundos) *60);
+                //finalHolder.txthora.setText(String.format(Locale.getDefault(), "%d sec.", millisUntilFinished / 1000L));
+                finalHolder.txthora.setText(hours + ":" + minute + ":" + second);
+
+            }
+
+            public void onFinish() {
+                finalHolder.txthora.setText(String.valueOf(segundosdehora(pedido.getTiempopreparacion())));
+            }
+        }.start();*/
         return  row;
     }
     public String separarHora(String hora){
@@ -126,7 +171,7 @@ public class PedidoListAdapter extends BaseAdapter {
     }
     public void colorPedido(String pedido, ViewHolder holder){
         if(pedido==" PENDIENTE"){
-            holder.lypedidos.setBackgroundResource(R.drawable.efecto_lypendientes);
+            holder.lypedidos.setBackgroundResource(R.drawable.shadow_pedidos);
         }if(pedido==" FINALIZADO"){
             holder.lypedidos.setBackgroundResource(R.drawable.efecto_lyatendido);
         }if(pedido==" ANULADO"){
@@ -134,15 +179,18 @@ public class PedidoListAdapter extends BaseAdapter {
         }if(pedido==" EN PROCESO"){
             holder.lypedidos.setBackgroundResource(R.drawable.efecto_lyproceso);
         }if(pedido==" PREPARANDO"){
-            holder.lypedidos.setBackgroundResource(R.drawable.efecto_lypreparando);
+            holder.lypedidos.setBackgroundResource(R.drawable.shadow_azul);
         }if(pedido==" PREPARADO"){
-            holder.lypedidos.setBackgroundResource(R.drawable.efecto_lypreparado);
+            holder.lypedidos.setBackgroundResource(R.drawable.shadow_proceso);
         }if(pedido==" ESPERA"){
             holder.lypedidos.setBackgroundResource(R.drawable.efecto_lyespera);
-
         }
         if(pedido==" RECOGER"){
-            holder.lypedidos.setBackgroundResource(R.drawable.efecto_lyproceso);
+            holder.lypedidos.setBackgroundResource(R.drawable.shadow_proceso);
         }
+
     }
+
+
+
 }
