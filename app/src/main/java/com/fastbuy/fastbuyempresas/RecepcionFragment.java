@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -100,7 +101,7 @@ public class RecepcionFragment extends Fragment {
 
         String consulta = Globales.servidor +"/Empresas/PedidosxEmpresaUbicacion?auth="+Globales.token+ "&codigoe=" + codigoe + "&codigou=" + codigou;;
         Log.v("URL", consulta);
-        RequestQueue queue = Volley.newRequestQueue(getContext());
+        RequestQueue queue = Volley.newRequestQueue((PrincipalActivity) getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, consulta, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -143,9 +144,15 @@ public class RecepcionFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progDailog.dismiss();
+                Intent intent=new Intent(getContext(), DesconectadoActivity.class);
+                startActivity(intent);
             }
         });
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
     }
 

@@ -8,11 +8,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission
-        android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_LOGS" tools:ignore="ProtectedPermissions" />
+
+    <uses-permission android:name="com.google.android.c2dm.permision.RECEIVE"/>
+
 
     <application
         android:allowBackup="true"
@@ -23,9 +23,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateHidden">
+        <activity android:name=".EditarProductoActivity"></activity>
+
+        <activity android:name=".ReportarErrorActivity" />
+        <activity android:name=".ContactanosActivity" />
         <activity
             android:name=".PrincipalActivity"
-            android:label="@string/title_activity_principal"></activity>
+            android:label="@string/title_activity_principal" />
         <activity
             android:name=".GraficoActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -99,6 +103,17 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <receiver android:name=".Config.AlarmReceiver"
+            android:enabled="true">
+        </receiver>
+
+        <service
+            android:name=".Config.NotificationService"
+            android:enabled="true">
+
+        </service>
+
     </application>
 
 </manifest>

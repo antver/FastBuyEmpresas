@@ -46,6 +46,7 @@ dependencies {
     implementation 'com.github.kenglxn.QRGen:android:2.5.0'
     implementation 'com.google.android.material:material:1.1.0'//qr
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3' //Graficos
+    //implementation project(':notifikationmanager')
 
 }
 apply plugin: 'com.google.gms.google-services'

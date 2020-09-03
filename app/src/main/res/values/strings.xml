@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">FastBuy Partner</string>
     <string name="fcm_message">FastBuy Delivery</string>
-    <string name="default_notification_channel_id" translatable="false">default</string>
+    <string name="default_notification_channel_id" translatable="false">canal_fastbuy_partner01</string>
     <!--
         This is the name that users will see when interacting with this channel.
         It should describe the category of notifications that will be sent through this channel
      -->
     <!-- [START fcm_default_icon_string] -->
-    <string name="default_notification_channel_name" translatable="true">fastbuy</string>
+    <string name="default_notification_channel_name" translatable="true">FastbuyPartner</string>
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
     <string name="calendario">Seleccione fecha</string>
     <string-array name="reporte">

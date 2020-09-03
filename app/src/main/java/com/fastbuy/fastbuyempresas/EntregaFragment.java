@@ -1,6 +1,7 @@
 package com.fastbuy.fastbuyempresas;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -127,9 +129,15 @@ public class EntregaFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progDailog.dismiss();
+                Intent intent=new Intent(getContext(), DesconectadoActivity.class);
+                startActivity(intent);
             }
         });
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
     }
 

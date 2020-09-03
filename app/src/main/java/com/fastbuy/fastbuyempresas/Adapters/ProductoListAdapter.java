@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.fastbuy.fastbuyempresas.CategoriasActivity;
 import com.fastbuy.fastbuyempresas.Config.Globales;
+import com.fastbuy.fastbuyempresas.EditarProductoActivity;
 import com.fastbuy.fastbuyempresas.Entidades.Categoria;
 import com.fastbuy.fastbuyempresas.Entidades.Producto;
 import com.fastbuy.fastbuyempresas.LoginActivity;
@@ -55,7 +57,8 @@ public class ProductoListAdapter extends BaseAdapter {
     private int layout;
     private ArrayList<Producto> productoList;
     private Typeface script;
-
+    SharedPreferences.Editor myEditor;
+    SharedPreferences mypreferences;
     public ProductoListAdapter(Context context, int layout,ArrayList<Producto> productoList){
         this.context = context;
         this.layout = layout;
@@ -79,6 +82,7 @@ public class ProductoListAdapter extends BaseAdapter {
         TextView txtdescripcion,txtprecio;
         ImageView ivproducto;
         Switch swactivar;
+        ImageButton btnEditar;
     }
 
     public View getView(final int position, View view, ViewGroup parent){
@@ -91,6 +95,7 @@ public class ProductoListAdapter extends BaseAdapter {
             holder.txtprecio=(TextView) row.findViewById(R.id.txtPrecio);
             holder.ivproducto= (ImageView) row.findViewById(R.id.ivproductos);
             holder.swactivar= (Switch) row.findViewById(R.id.swproductos);
+            holder.btnEditar = (ImageButton) row.findViewById(R.id.btnEditar);
             row.setTag(holder);
 
 
@@ -105,7 +110,7 @@ public class ProductoListAdapter extends BaseAdapter {
         String url= Globales.servidorfotosproductos+"/fotos/"+producto.getImagen();
         activarswift(producto.getEstado(),holder);
 
-        SharedPreferences mypreferences= PreferenceManager.getDefaultSharedPreferences(context);
+        mypreferences = PreferenceManager.getDefaultSharedPreferences(context);
         final String codigou= mypreferences.getString("UBICACION","unknown");
         final ViewHolder finalHolder1 = holder;
         final ViewHolder finalHolder2 = holder;
@@ -116,7 +121,7 @@ public class ProductoListAdapter extends BaseAdapter {
                         finalHolder2.swactivar.setChecked(false);
                         String url = Globales.servidor + "/Empresas/sp_empresas_activarPro?auth=" +
                                 Globales.token + "&codigop=" + productoList.get(position).getCodigo() +
-                                "&codigou=" + codigou+"&pres="+productoList.get(position).getPresentacion();
+                                "&codigou=" + codigou+"&pres="+productoList.get(position).getPresentacion().getCodigo();
                         String mensaje = "Activado";
                         String tipo = "Desea Activar este Producto?";
                         createCustomDialog(position, url, mensaje, tipo, finalHolder1).show();
@@ -133,6 +138,19 @@ public class ProductoListAdapter extends BaseAdapter {
                         //Toast.makeText(context, "Pedido Entrante: " + productoList.get(position).getCodigo(), Toast.LENGTH_SHORT).show();
 
                 }
+            }
+        });
+
+        holder.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mypreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                myEditor = mypreferences.edit();
+                myEditor.putString("producto_seleccionado", String.valueOf(productoList.get(position).getCodigo()));
+                myEditor.putString("presentacion_seleccionada", String.valueOf(productoList.get(position).getPresentacion().getCodigo()));
+                myEditor.commit();
+                Intent intent = new Intent(context, EditarProductoActivity.class);
+                context.startActivity(intent);
             }
         });
         //Log.v("RUTA_IMAGEN",url);

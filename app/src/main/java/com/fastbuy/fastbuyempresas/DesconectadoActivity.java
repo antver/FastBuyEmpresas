@@ -56,7 +56,7 @@ public class DesconectadoActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }else{
-                        Intent intent=new Intent(DesconectadoActivity.this, MenuActivity.class);
+                        Intent intent=new Intent(DesconectadoActivity.this, PrincipalActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -92,7 +92,7 @@ public class DesconectadoActivity extends AppCompatActivity {
                 Intent intent=new Intent(DesconectadoActivity.this, LoginActivity.class);
                 startActivity(intent);
             }else{
-                Intent intent=new Intent(DesconectadoActivity.this, MenuActivity.class);
+                Intent intent=new Intent(DesconectadoActivity.this, PrincipalActivity.class);
                 startActivity(intent);
             }
             //moveTaskToBack(false);

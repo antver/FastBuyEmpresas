@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -53,7 +54,7 @@ public class CategoriasActivity extends AppCompatActivity {
     //TextView txtNombre3,txtrazonsocial3;
     GridView gridView3;
     ArrayList<Producto> list;
-    ProgressDialog progDailog=null;
+    ProgressDialog progDailog;
     ProductoListAdapter adapter=null;
     Typeface script;
     @Override
@@ -111,11 +112,6 @@ public class CategoriasActivity extends AppCompatActivity {
             Intent intent=new Intent(CategoriasActivity.this, DesconectadoActivity.class);
             startActivity(intent);
         }
-        progDailog = new ProgressDialog(CategoriasActivity.this);
-        progDailog.setMessage("Cargando Productos...");
-        progDailog.setIndeterminate(true);
-        progDailog.setCancelable(false);
-        progDailog.show();
        // btnproductos3.setBackgroundResource(R.color.fastbuy);
         //MyDrawableCompat.setColorFilter(btnmenu.getBackground(), R.color.blanco);
         int color= ContextCompat.getColor(getApplicationContext(), R.color.blanco);
@@ -141,10 +137,16 @@ public class CategoriasActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });*/
-        listaDetalles(codigoe,codigou,Globales.categoriac);
+        //listaDetalles(codigoe,codigou,Globales.categoriac);
 
     }
+
     public void listaDetalles(String codigoe,String codigou, String categoria){
+        progDailog = new ProgressDialog(CategoriasActivity.this);
+        progDailog.setMessage("Cargando Productos...");
+        progDailog.setIndeterminate(true);
+        progDailog.setCancelable(false);
+        progDailog.show();
         String consulta = Globales.servidor +"/Empresas/sp_empresas_productoxcat?auth="+Globales.token+ "&codigoe=" + codigoe + "&codigou=" + codigou+"&categoria="+categoria;
         RequestQueue queue= Volley.newRequestQueue(CategoriasActivity.this);
         StringRequest stringRequest= new StringRequest(Request.Method.GET, consulta, new Response.Listener<String>() {
@@ -186,11 +188,19 @@ public class CategoriasActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progDailog.dismiss();
+                Intent intent=new Intent(CategoriasActivity.this, DesconectadoActivity.class);
+                startActivity(intent);
             }
         }
         );
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
     }
+
+
     public Boolean isOnlineNet() {
 
         try {
@@ -213,5 +223,15 @@ public class CategoriasActivity extends AppCompatActivity {
         NetworkInfo actNetInfo = connectivityManager.getActiveNetworkInfo();
 
         return (actNetInfo != null && actNetInfo.isConnected());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences mypreferences= PreferenceManager.getDefaultSharedPreferences(CategoriasActivity.this);
+        String codigoe= mypreferences.getString("CODIGO_EMPRESA","unknown");
+        String codigou= mypreferences.getString("UBICACION","unknown");
+        listaDetalles(codigoe,codigou,Globales.categoriac);
     }
 }

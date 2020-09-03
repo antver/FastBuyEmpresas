@@ -77,7 +77,7 @@
 
                 <ImageButton
                     android:background="@color/blanco"
-                    android:id="@+id/imageButton"
+                    android:id="@+id/btnEditar"
                     android:layout_width="wrap_content"
                     android:layout_height="80dp"
                     android:layout_gravity="right"

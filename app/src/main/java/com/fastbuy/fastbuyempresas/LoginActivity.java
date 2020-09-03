@@ -40,6 +40,10 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog proDialog= null;
     Typeface script,script2;
     TextView txtTitulo, txtNombretema, txtclavet, txtusuariot,txtOlvidotema;
+    CheckBox chkRecordar;
+    SharedPreferences myPreferences;
+    SharedPreferences.Editor myEditor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         txtclavet=(TextView) findViewById(R.id.txtclavet);
         txtNombretema= (TextView) findViewById(R.id.txtEmpresaTema);
         txtTitulo=(TextView) findViewById(R.id.txtTitulo);
-        txtOlvidotema=(TextView) findViewById(R.id.txtOlvidotema);
+        //txtOlvidotema=(TextView) findViewById(R.id.txtOlvidotema);
+        chkRecordar = (CheckBox) findViewById(R.id.chkRecordar);
 
         String fuente="fonts/Riffic.ttf";
         String fuente2="fonts/GOTHIC.ttf";
@@ -63,12 +68,26 @@ public class LoginActivity extends AppCompatActivity {
         txtusuariot.setTypeface(script2);
         etNombre.setTypeface(script2);
         etClave.setTypeface(script2);
-        txtOlvidotema.setTypeface(script2);
+        //txtOlvidotema.setTypeface(script2);
         btnIngresar.setTypeface(script2);
+
+        myPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        myEditor = myPreferences.edit();
+        etNombre.setText(myPreferences.getString("USUARIO_GUARDADO", ""));
+        etClave.setText(myPreferences.getString("CLAVE_GUARDADA", ""));
+        chkRecordar.setChecked(myPreferences.getBoolean("RECORDAR_CLAVE", false));
         if(!isNetDisponible()){
             Intent intent=new Intent(LoginActivity.this, DesconectadoActivity.class);
             startActivity(intent);
         }
+        /*chkRecordar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                myPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                myEditor.putBoolean("RECORDAR_CLAVE", isChecked);
+                myEditor.commit();
+            }
+        });*/
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,9 +140,13 @@ public class LoginActivity extends AppCompatActivity {
                                     etClave.requestFocus();
                                 }
                                 if (respuesta.equals("ok")) {
+                                    myEditor.putBoolean("RECORDAR_CLAVE", false);
+                                    if(chkRecordar.isChecked()){
+                                        myEditor.putString("USUARIO_GUARDADO", etNombre.getText().toString());
+                                        myEditor.putString("CLAVE_GUARDADA", etClave.getText().toString());
+                                        myEditor.putBoolean("RECORDAR_CLAVE", true);
+                                    }
 
-                                    SharedPreferences myPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-                                    SharedPreferences.Editor myEditor = myPreferences.edit();
                                     myEditor.putString("CODIGO_EMPRESA", objeto.getString("codigo"));
                                     myEditor.putString("NOMBRE_EMPRESA", objeto.getString("nombre"));
                                     myEditor.putString("UBICACION", objeto.getString("ubicacion"));
@@ -135,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                                     myEditor.commit();
                                     finish();
 
-                                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
                                     startActivity(intent);
                                 }
                                 proDialog.dismiss();

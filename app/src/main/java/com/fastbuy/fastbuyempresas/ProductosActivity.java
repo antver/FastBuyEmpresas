@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -182,9 +183,15 @@ public class ProductosActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progDailog.dismiss();
+                Intent intent=new Intent(ProductosActivity.this, DesconectadoActivity.class);
+                startActivity(intent);
             }
         });
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
     }
     public Boolean isOnlineNet() {

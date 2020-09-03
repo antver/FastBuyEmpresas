@@ -420,7 +420,7 @@
                 android:id="@+id/btnFinalizarDelivery"
                 android:layout_width="95dp"
                 android:layout_height="50dp"
-                android:text="Finalizar \n Delivery"
+                android:text="Finalizar Delivery"
                 android:textSize="6pt"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:background="@drawable/efecto_btnyellow"

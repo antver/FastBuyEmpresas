@@ -45,6 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="-61dp"
                 android:orientation="vertical"
+                android:layout_marginBottom="50dp"
                 android:paddingVertical="20dp">
 
                 <LinearLayout
@@ -267,6 +268,7 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="70dp"
                             android:layout_height="70dp"
+                            android:id="@+id/cardproducto"
                             app:cardCornerRadius="10dp">
 
                             <ImageView
@@ -314,17 +316,17 @@
                         </LinearLayout>
 
                     </LinearLayout>
-
+                    <Button
+                        android:id="@+id/btnReporteVentas"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/blanco"
+                        android:layout_marginTop="20dp"
+                        android:text="Ver repote de ventas"
+                        android:background="@color/fastbuy">
+                    </Button>
                 </LinearLayout>
-                <Button
-                    android:id="@+id/btnReporteVentas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/blanco"
-                    android:text="Ver repote de ventas"
-                    android:layout_marginHorizontal="20dp"
-                    android:background="@color/fastbuy">
-                </Button>
+
 
             </LinearLayout>
         </LinearLayout>

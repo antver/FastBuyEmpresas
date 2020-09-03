@@ -53,20 +53,15 @@ import org.json.JSONObject;
 import java.net.URLEncoder;
 
 public class PerfilActivity extends AppCompatActivity {
-    TextView txtNombrep, txtRazonp,txtnocoindiden,txtUsuario,txtcampoClave,txtcamponombre,txtrepe;
-    ImageView ivFoto,ivcerrarsesion;
     Button btnAceptarcambio, btnCancelarcambio,ivcoinciden;
     EditText txtcontra,txtcontraN,txtcontraNR, etusuario;
     Typeface script;
-    Switch swCierre;
+    TextView txtnocoindiden;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
-        txtNombrep= (TextView) findViewById(R.id.txtNombreEmpresap);
-        txtRazonp= (TextView) findViewById(R.id.txtrazonsocialp);
-        ivFoto=(ImageView) findViewById(R.id.ivempresap);
         btnAceptarcambio= (Button) findViewById(R.id.btnAceptarp);
         btnCancelarcambio= (Button) findViewById(R.id.btnCancelarp);
         txtcontra= (EditText) findViewById(R.id.txtContrasenactual);
@@ -75,28 +70,15 @@ public class PerfilActivity extends AppCompatActivity {
         txtnocoindiden= (TextView) findViewById(R.id.txtNoCoinciden);
         ivcoinciden= (Button) findViewById(R.id.ivCoinciden);
         etusuario=(EditText) findViewById(R.id.etUsuario);
-        ivcerrarsesion=(ImageView) findViewById(R.id.btncerrarsesion);
-        txtUsuario=(TextView) findViewById(R.id.txtUsuario);
-        txtcampoClave=(TextView) findViewById(R.id.txtcampoClave);
-        txtcamponombre=(TextView) findViewById(R.id.txtcamponombre);
-        txtrepe=(TextView) findViewById(R.id.txtrepe);
-        swCierre= (Switch) findViewById(R.id.swAbierta);
 
         String fuente2="fonts/GOTHIC.ttf";
         this.script= Typeface.createFromAsset(getAssets(),fuente2);
-        txtNombrep.setTypeface(script);
-        txtRazonp.setTypeface(script);
-        txtUsuario.setTypeface(script);
         etusuario.setTypeface(script);
-        txtcampoClave.setTypeface(script);
         txtcontra.setTypeface(script);
-        txtcamponombre.setTypeface(script);
         txtcontraN.setTypeface(script);
-        txtrepe.setTypeface(script);
         txtcontraNR.setTypeface(script);
         btnAceptarcambio.setTypeface(script);
         btnCancelarcambio.setTypeface(script);
-        swCierre.setTypeface(script);
         if(isNetDisponible()){
             //Toast.makeText(PerfilActivity.this,"Conexión a internet", Toast.LENGTH_SHORT).show();
         }else{
@@ -114,40 +96,7 @@ public class PerfilActivity extends AppCompatActivity {
         final String codigoe= mypreferences.getString("CODIGO_EMPRESA","unknown");
         final String codigou= mypreferences.getString("UBICACION","unknown");
         final String cierre= mypreferences.getString("CIERRE","unknown");
-        txtNombrep.setText(nombreempresa);
-        txtRazonp.setText(razonsocial);
         etusuario.setText(login);
-        String url= Globales.servidorfotos+"/logos/"+fotoempresa;
-        Log.v("RUTA_IMAGEN",url);
-        Picasso.with(PerfilActivity.this)
-                .load(url)
-                .error(R.mipmap.ic_launcher)
-                .fit()
-                .centerInside()
-                .into(ivFoto, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        Bitmap imagebitmap= ((BitmapDrawable) ivFoto.getDrawable()).getBitmap();
-                        RoundedBitmapDrawable imageDrawable= RoundedBitmapDrawableFactory.create(getResources(),imagebitmap);
-                        imageDrawable.setCircular(true);
-                        imageDrawable.setCornerRadius(Math.max(imagebitmap.getWidth(),imagebitmap.getHeight())/ 2.0f);
-                        ivFoto.setImageDrawable(imageDrawable);
-                    }
-                    @Override
-                    public void onError() {
-                        ivFoto.setImageResource(R.mipmap.ic_launcher);
-                    }
-                });
-        //Toast.makeText(PerfilActivity.this, "e "+cierre,Toast.LENGTH_SHORT).show();
-        if(cierre.equals("Abierto")){
-            swCierre.setText("Empresa Abierta");
-            swCierre.setChecked(true);
-            //Toast.makeText(PerfilActivity.this,"Error: "+Globales.EstadoEmpresa, Toast.LENGTH_SHORT).show();
-        }else{
-            swCierre.setChecked(false);
-            swCierre.setText("Empresa Cerrada");
-           // Toast.makeText(PerfilActivity.this,"Error: "+Globales.EstadoEmpresa, Toast.LENGTH_SHORT).show();
-        }
         btnAceptarcambio.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -184,11 +133,7 @@ public class PerfilActivity extends AppCompatActivity {
         btnCancelarcambio.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                        String url="vacia";
-                        String tipo="Desea Cancelar Cambio de Contraseña?";
-                        String opcion="C";
-                        //Toast.makeText(PerfilActivity.this,"asd",Toast.LENGTH_SHORT).show();
-                        createCustomDialog(url,tipo,nombreempresa,opcion).show();
+                        finish();
                 }
         });
         txtcontraNR.addTextChangedListener(new TextWatcher() {
@@ -214,35 +159,6 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-            }
-        });
-        ivcerrarsesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url="";
-                String tipo="Desea Cerrar Sesión?";
-                String opcion="Cerrar";
-                //Toast.makeText(PerfilActivity.this,"asd",Toast.LENGTH_SHORT).show();
-                createCustomDialog(url,tipo,nombreempresa,opcion).show();
-            }
-        });
-        swCierre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    swCierre.setChecked(false);
-                    String url=Globales.servidor + "/Empresas/AbrirForzado?auth=" + Globales.token+"&codigoe="+codigoe+"&codigou="+codigou;
-                    String tipo="Desea Abrir La Tienda?";
-                    String opcion="A";
-                    createCustomDialog(url,tipo,nombreempresa,opcion).show();
-                }
-                else{
-                    swCierre.setChecked(true);
-                    String url=Globales.servidor + "/Empresas/CierreForzado?auth=" + Globales.token+"&codigoe="+codigoe+"&codigou="+codigou;
-                    String tipo="Desea Cerrar La Tienda?";
-                    String opcion="A";
-                    createCustomDialog(url,tipo,nombreempresa,opcion).show();
-                }
             }
         });
 
@@ -315,30 +231,7 @@ public class PerfilActivity extends AppCompatActivity {
                                                 startActivity(intent);
                                                 alertDialog.dismiss();
                                             }
-                                            if(respuesta.equals("Cerrada") || respuesta.equals("Abierta")){
-                                                if(respuesta.equals("Cerrada")){
-                                                    editor.putString("CIERRE", "Cerrado");
-                                                    editor.commit();
-                                                    //Globales.EstadoEmpresa="Cerrado";
-                                                    swCierre.setText("Empresa Cerrada");
-                                                }
-                                                else{
-                                                    editor.putString("CIERRE", "Abierto");
-                                                    editor.commit();
-                                                    //Globales.EstadoEmpresa="Abierto";
-                                                    swCierre.setText("Empresa Abierta");
-                                                }
 
-                                                Toast toast = Toast.makeText(PerfilActivity.this, "Empresa "+respuesta, Toast.LENGTH_SHORT);
-                                                View vistaToast = toast.getView();
-                                                vistaToast.setBackgroundResource(R.drawable.toast_exito);
-                                                toast.show();
-                                                alertDialog.dismiss();
-                                                killActivity();
-                                                overridePendingTransition(0, 0);
-                                                startActivity(getIntent());
-                                                overridePendingTransition(0, 0);
-                                            }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                             alertDialog.dismiss();
@@ -352,22 +245,8 @@ public class PerfilActivity extends AppCompatActivity {
                                 }
                             });
                             queue.add(stringRequest);
-                        }if(opcion=="C"){
-                            Intent intent = new Intent(PerfilActivity.this, MenuActivity.class);
-                            startActivity(intent);
                         }
-                        if(opcion=="Cerrar"){
 
-                            editor.clear();
-                            editor.commit();
-
-                            Intent myService = new Intent(PerfilActivity.this, ServicioPartner.class);
-                            stopService(myService);
-
-                            Intent intent= new Intent(PerfilActivity.this,LoginActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(PerfilActivity.this,"Sesion Cerrada con Exito", Toast.LENGTH_SHORT).show();
-                        }
                     }
                 }
         );

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
@@ -51,7 +52,7 @@ public class DashboardFragment extends Fragment {
     TextView txtNombre, txtDecripcion;
     ImageView ivPortada, ivproductos;
     TextView tvCantidadAtendidos, tvTotalVentas, tvCrecimiento, tvProductosRegistrados, tvProductosVenta, txtCantProductoVendido, tvNombreProducto;
-
+    CardView cardproducto;
     private DashboardViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -76,6 +77,7 @@ public class DashboardFragment extends Fragment {
         String fotoempresa= mypreferences.getString("FOTO_EMPRESA","unknown");
         txtNombre= (TextView) root.findViewById(R.id.txtNombreEmpresa);
         txtDecripcion= (TextView) root.findViewById(R.id.txtDecripcion);
+        cardproducto = (CardView) root.findViewById(R.id.cardproducto);
         txtNombre.setText(nombreempresa);
         txtDecripcion.setText(razonsocial);
 
@@ -108,6 +110,7 @@ public class DashboardFragment extends Fragment {
         CargarImagen(url, ivimagen);
         CargarImagen(url, ivimagen2);
         String consulta = "https://www.apifbempresas.fastbuych.com/Empresas/DashboardEmpresa?empresa="+codempresa+"&ubicacion=" + codubicacion;
+        Log.v("CONSULTA", consulta);
         RequestQueue queue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, consulta, new Response.Listener<String>() {
             @Override
@@ -127,11 +130,18 @@ public class DashboardFragment extends Fragment {
                             tvCrecimiento.setText(String.format("%.2f", x).toString().replace(",",".") + " %");
                             tvProductosRegistrados.setText(lista.getJSONObject(i).getString("TotalProductos"));
                             tvProductosVenta.setText(lista.getJSONObject(i).getString("ProductosVenta"));
-                            String producto = lista.getJSONObject(i).getString("ProductoMasVendido");
+                            if(!lista.getJSONObject(i).getString("ProductoMasVendido").equals("null")) {
+                                String producto = lista.getJSONObject(i).getString("ProductoMasVendido");
+                                txtCantProductoVendido.setText(producto.split("#FF_BB#")[1] + " Unid.");
+                                tvNombreProducto.setText(producto.split("#FF_BB#")[0]);
+                                imagenproducto = producto.split("#FF_BB#")[2];
 
-                            txtCantProductoVendido.setText(producto.split("#FF_BB#")[1] + " Unid.");
-                            tvNombreProducto.setText(producto.split("#FF_BB#")[0]);
-                            imagenproducto = producto.split("#FF_BB#")[2];
+                            }else{
+                                tvNombreProducto.setText("No tiene productos vendidos en este mes.");
+                                txtCantProductoVendido.setVisibility(View.GONE);
+                                ivproductos.setVisibility(View.GONE);
+                                cardproducto.setVisibility(View.GONE);
+                            }
                         }
                         Picasso.with(getContext())
                                 .load("https://fastbuych.com/empresas/portadas/" + nombreportada)

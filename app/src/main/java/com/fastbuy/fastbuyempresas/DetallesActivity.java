@@ -43,6 +43,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -217,6 +218,7 @@ public class DetallesActivity extends AppCompatActivity {
                 tipo="Aceptado";
                 colorestadop=" PREPARANDO";
                 createCustomDialog(url,alerta,tipo,colorestadop).show();
+
             }
         });
         /*btnCancelarPed.setOnClickListener(new View.OnClickListener(){
@@ -441,7 +443,7 @@ public class DetallesActivity extends AppCompatActivity {
                         txtView_direccion_cliente.setText(PED_direccion);
                         txtView_nombre_cliente.setText(PED_nombre);
                         txtView_telefono_cliente.setText(PED_telefono);
-                        linearLayout_3_buttons.setVisibility(View.VISIBLE);
+                        //linearLayout_3_buttons.setVisibility(View.VISIBLE);
                         btnIniciarDelivery.setVisibility(View.GONE);
                         btnFinalizarDelivery.setVisibility(View.GONE);
 
@@ -561,16 +563,16 @@ public class DetallesActivity extends AppCompatActivity {
             barestado.setBackgroundResource(R.drawable.shadow_atendido);
             //txtestado.setBackgroundResource(R.color.atendido);
             btnAceptarPed.setVisibility(View.INVISIBLE);
-            btnCancelarPed.setVisibility(View.INVISIBLE);
-            btnQr.setVisibility(View.INVISIBLE);
+            //btnCancelarPed.setVisibility(View.INVISIBLE);
+            //btnQr.setVisibility(View.INVISIBLE);
 
             btnlistoped.setVisibility(View.INVISIBLE);
             //lymostrar.setVisibility(View.INVISIBLE);
         }if(pedido==2){//PEDIDO ANULADO
             txtestado.setBackgroundResource(R.color.rojo);
             btnAceptarPed.setVisibility(View.INVISIBLE);
-            btnCancelarPed.setVisibility(View.INVISIBLE);
-            btnQr.setVisibility(View.INVISIBLE);
+            //btnCancelarPed.setVisibility(View.INVISIBLE);
+            //btnQr.setVisibility(View.INVISIBLE);
 
             btnlistoped.setVisibility(View.INVISIBLE);
             //lymostrar.setVisibility(View.INVISIBLE);
@@ -578,10 +580,10 @@ public class DetallesActivity extends AppCompatActivity {
             barestado.setBackgroundResource(R.drawable.shadow_proceso);
             //txtestado.setBackgroundResource(R.color.proceso);
             btnAceptarPed.setVisibility(View.INVISIBLE);
-            btnCancelarPed.setVisibility(View.INVISIBLE);
-            btnQr.setVisibility(View.INVISIBLE);
+            //btnCancelarPed.setVisibility(View.INVISIBLE);
+            //btnQr.setVisibility(View.INVISIBLE);
 
-            btnlistoped.setVisibility(View.VISIBLE);
+            btnlistoped.setVisibility(View.GONE);
             //lymostrar.setVisibility(View.INVISIBLE);
         }if(pedido==4){//PEDIDO EN PREPARACION
             barestado.setBackgroundResource(R.drawable.shadow_azul);
@@ -600,8 +602,8 @@ public class DetallesActivity extends AppCompatActivity {
         if(pedido==7){ //PEDIDO EN ESPERA POR REPARTIDOR
             txtestado.setBackgroundResource(R.color.alert);
             btnAceptarPed.setVisibility(View.INVISIBLE);
-            btnCancelarPed.setVisibility(View.INVISIBLE);
-            btnQr.setVisibility(View.INVISIBLE);
+            //btnCancelarPed.setVisibility(View.INVISIBLE);
+            //btnQr.setVisibility(View.INVISIBLE);
 
             btnlistoped.setVisibility(View.INVISIBLE);
             //lymostrar.setVisibility(View.INVISIBLE);
@@ -609,8 +611,8 @@ public class DetallesActivity extends AppCompatActivity {
         if(pedido==8){ //PEDIDO PARA RECOGER
             txtestado.setBackgroundResource(R.color.proceso);
             btnAceptarPed.setVisibility(View.INVISIBLE);
-            btnCancelarPed.setVisibility(View.INVISIBLE);
-            btnQr.setVisibility(View.VISIBLE);
+            //btnCancelarPed.setVisibility(View.INVISIBLE);
+           // btnQr.setVisibility(View.VISIBLE);
 
             btnlistoped.setVisibility(View.INVISIBLE);
             //lymostrar.setVisibility(View.INVISIBLE);
@@ -647,6 +649,7 @@ public class DetallesActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         // Aceptar
                         String consulta= urls;
+                        //Log.v("URLQUEPASA", consulta);
                         RequestQueue queue = Volley.newRequestQueue(DetallesActivity.this);
                         StringRequest stringRequest = new StringRequest(Request.Method.GET, consulta, new Response.Listener<String>() {
                             @Override
@@ -657,31 +660,15 @@ public class DetallesActivity extends AppCompatActivity {
                                         String respuesta = object.getString("mensaje");
                                         if(respuesta.equals("Listo")){
                                             listaDetalles();
-                                            //Globales.pedidoestado=colorestadops;
-                                            //Toast toast = Toast.makeText(DetallesActivity.this, "Pedido "+ tipos+" con éxito.", Toast.LENGTH_SHORT);
-                                            //View vistaToast = toast.getView();
-                                            //vistaToast.setBackgroundResource(R.drawable.toast_exito);
-                                            //toast.show();
                                             alertDialog.dismiss();
-                                            //finish();
-                                            //overridePendingTransition(0, 0);
-                                            //startActivity(getIntent());
-                                            //overridePendingTransition(0, 0);
                                         }
                                         if(!respuesta.equals("Listo") && !respuesta.equals("CAMBIADO")){
                                             listaDetalles();
-                                            //Toast toast = Toast.makeText(DetallesActivity.this, respuesta, Toast.LENGTH_SHORT);
-                                            //View vistaToast = toast.getView();
-                                            //vistaToast.setBackgroundResource(R.drawable.toast_alerta);
-                                            //toast.show();
                                             alertDialog.dismiss();
-                                            //finish();
-                                            //overridePendingTransition(0, 0);
-                                            //startActivity(getIntent());
-                                            //overridePendingTransition(0, 0);
                                         }
                                         if(respuesta.equals("CAMBIADO")){
                                             listaDetalles();
+                                            alertDialog.dismiss();
                                             /*Globales.pedidoestado=colorestadops;
                                             Toast toast = Toast.makeText(DetallesActivity.this, "Cambios Aceptados", Toast.LENGTH_SHORT);
                                             View vistaToast = toast.getView();
@@ -692,7 +679,7 @@ public class DetallesActivity extends AppCompatActivity {
                                             startActivity(getIntent());
                                             overridePendingTransition(0, 0);
                                             Globales.Pedidositem.clear();*/
-                                            alertDialog.dismiss();
+
                                         }
 
                                     } catch (JSONException e) {
@@ -705,8 +692,14 @@ public class DetallesActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 alertDialog.dismiss();
+                                Intent intent=new Intent(DetallesActivity.this, DesconectadoActivity.class);
+                                startActivity(intent);
                             }
                         });
+                        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                                10000,
+                                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                         queue.add(stringRequest);
                     }
                 }
